@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GT탐정사무소</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== [1] 상단 로고 바 (MK탐정사무소 스타일) ========== -->
+  <div id="top-logo-bar">
+    <a href="#hero">
+      <img src="assets/logo-hd.png" alt="GT탐정사무소 로고" />
+    </a>
+  </div>
+
+  <!-- ========== [2] 네비게이션 (법무법인여온 스타일) ========== -->
+  <header id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="assets/logo-white.png" class="logo-hero" alt="GT탐정사무소" />
+        <img src="assets/logo.png" class="logo-scrolled" alt="GT탐정사무소" />
+      </a>
+      <nav class="nav-menu" role="navigation" aria-label="주요 메뉴">
+        <a href="#hero">회사소개</a>
+        <a href="#process">업무절차</a>
+        <a href="#services">주요업무</a>
+        <a href="#certifications">자격증</a>
+        <a href="#contact">상담문의</a>
+      </nav>
+      <button class="nav-hamburger" id="sideMenuOpen" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 사이드 메뉴 오버레이 (법무법인여온 스타일) -->
+  <div id="side-overlay" aria-hidden="true"></div>
+  <aside id="side-menu" aria-label="사이드 메뉴">
+    <button class="side-close" id="sideMenuClose" aria-label="메뉴 닫기">닫기 ✕</button>
+    <nav class="side-nav">
+      <a href="#hero" class="side-link">회사소개</a>
+      <a href="#process" class="side-link">업무절차</a>
+      <a href="#services" class="side-link">주요업무</a>
+      <a href="#certifications" class="side-link">자격증</a>
+      <a href="#contact" class="side-link">상담문의</a>
+    </nav>
+  </aside>
+
+  <!-- ========== [3] 히어로 섹션 (법무법인여온 스타일) ========== -->
+  <section id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <!-- 왼쪽: 슬로건 + 감성문구 + CTA -->
+      <div class="hero-left">
+        <p class="hero-label">GT탐정사무소</p>
+        <h1 class="hero-title">신뢰</h1>
+        <p class="hero-sub">
+          우리는 의뢰인의 신뢰와 만족을 최우선으로 합니다.<br />
+          합법적이고 신뢰할 수 있는 탐정 서비스.
+        </p>
+        <a href="#contact" class="hero-cta">바로 상담하기</a>
+      </div>
+
+      <!-- 오른쪽: 탐정 프로필 카드 (1초마다 전환) -->
+      <div class="hero-right">
+        <!-- 프로필 1: 김세진 -->
+        <div class="profile-card active" id="profile-0">
+          <img src="basic data/1.png" alt="탐정사 김세진" class="profile-img-full" />
+        </div>
+
+        <!-- 프로필 2: 김민재 -->
+        <div class="profile-card" id="profile-1">
+          <img src="basic data/2.png" alt="前 경찰수사관 김민재" class="profile-img-full" />
+        </div>
+
+        <!-- 전환 도트 인디케이터 -->
+        <div class="profile-dots" aria-label="프로필 전환">
+          <button class="dot active" data-idx="0" aria-label="김세진"></button>
+          <button class="dot" data-idx="1" aria-label="김민재"></button>
+        </div>
+      </div>
+    </div>
+    <!-- 히어로 하단 뱃지 바 -->
+    <div class="hero-badges">
+      <div class="hero-badge-inner">
+        <div class="hero-badge">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+          <span>24시간 상담 가능</span>
+        </div>
+        <div class="hero-badge-divider"></div>
+        <div class="hero-badge">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+          <span>전국 어디서든 업무 진행</span>
+        </div>
+        <div class="hero-badge-divider"></div>
+        <div class="hero-badge">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+          <span>경찰수사관 출신 탐정 배치</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 이하 섹션은 순차 구현 예정 ========== -->
+  <main id="main-content">
+
+    <!-- ========== [3-1] 수치 브랜딩 섹션 ========== -->
+    <section id="stats">
+      <div class="stats-bg-grid"></div>
+      <div class="stats-inner">
+
+        <!-- 브랜드 헤더 -->
+        <div class="stats-brand" data-animate>
+          <img src="assets/logo-hd.png" alt="GT탐정사무소" class="stats-logo" />
+          <div class="stats-divider"></div>
+          <p class="stats-tagline">수치로 증명하는 신뢰 · 결과로 보답하는 전문성</p>
+        </div>
+
+        <!-- 수치 카드 -->
+        <div class="stats-grid" data-animate>
+          <div class="stat-card">
+            <div class="stat-num"><span class="count-up" data-target="100">0</span><span class="stat-suffix">%</span></div>
+            <p class="stat-label">비밀유지</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num"><span class="count-up" data-target="140">0</span><span class="stat-suffix">건+</span></div>
+            <p class="stat-label">이상의 수행경험</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num"><span class="count-up" data-target="87">0</span><span class="stat-suffix">%+</span></div>
+            <p class="stat-label">이상의 성공률</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num"><span class="count-up" data-target="78">0</span><span class="stat-suffix">%+</span></div>
+            <p class="stat-label">이상의 재의뢰·추천율</p>
+          </div>
+        </div>
+
+        <!-- 인용구 -->
+        <blockquote class="stats-quote" data-animate>
+          한 건 한 건의 사건에 의뢰인의 절실함이 담겨 있습니다.<br />
+          포기하지 않는 집요함으로 쌓아 올린 이 기록들이, 이제 당신의 문제를 해결할 차례입니다.
+        </blockquote>
+
+      </div>
+    </section>
+
+    <!-- ========== [3-2] FAQ 아코디언 ========== -->
+    <section id="faq">
+      <div class="faq-bg"></div>
+      <div class="faq-inner">
+
+        <!-- 상단: 타이틀 -->
+        <div class="faq-header">
+          <h2 class="faq-title">이런 걱정<br>하고 계신가요?</h2>
+        </div>
+
+        <!-- 아코디언 -->
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Q. 비싼 광고를 냈으니 비싼 수임료를 받는 거 아닌가요?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>탐정 시장도 경쟁이 치열합니다.</p>
+              <p>그만큼 광고에 들이는 비용도 많아졌는데요.</p>
+              <p>하지만 결국 치킨 게임입니다.</p>
+              <p>누가 더 많은 자본을 투입해 끝내 생존하느냐의 문제입니다.</p>
+              <p>하지만 그 광고비용은 누구의 부담일까요?</p>
+              <p>결국 의뢰인의 몫입니다.</p>
+              <p>과도한 광고비용을 상쇄하기 위해 무리한 수임을 할 수밖에 없고, 그 피해는 고스란히 의뢰인의 몫으로 돌아갑니다.</p>
+              <p>GT탐정사무소는 광고대행사를 통하지 않습니다.</p>
+              <p>그저 우리의 진정성이 당신에게 전달되길 기다리고 있습니다.</p>
+              <p>그만큼 광고로 소비되는 비용을 절약하고, 당신의 이익을 위해 사용하겠습니다.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Q. 담당 탐정이 중간에 바뀌는 건 아닌가요?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>"기존 담당 탐정이 퇴사했습니다. 제가 새로 배정받은 담당입니다. 사건 파악은 아직 못 했고요...(아마 조만간 다시 재배당 될 겁니다)"</p>
+              <p>만약, 당신의 사건을 의뢰했는데 담당 탐정이 계속 바뀐다면?</p>
+              <p>어떤 느낌일까요?</p>
+              <p>내 인생이 걸린 중요한 사건이 담당자 교체를 이유로 전전한다면, 과연 그 사건은 잘 해결될 수 있을까요?</p>
+              <p>그전에 담당자가 자주 바뀌는 곳은 과연 믿을 수 있는 곳일까요?</p>
+              <p>GT탐정사무소에는 재배당이 없습니다.</p>
+              <p>끝까지 여러분의 사건에 '무한한 책임'을 지겠습니다.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Q. 내 사건을 자격 없는 직원이 처리하는 건 아닌가요?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>왜 값비싼 수임료를 지불하고 전문 탐정에게 사건을 맡기시나요?</p>
+              <p>당연히 공인된 전문가가 '직접' 당신의 사건을 해결해주리라 믿기 때문이죠.</p>
+              <p>만약 상담할 때만 탐정이고 실제 조사는 자격 없는 직원이 처리한다면, 그 수임료 그대로 내시겠습니까?</p>
+              <p>당신은 인생이 걸린 중요한 사건을 자격 없는 직원에게 맡기고 싶으신가요?</p>
+              <p>GT탐정사무소는 자격 없는 직원이 없습니다.</p>
+              <p>원칙적으로 두지 않습니다.</p>
+              <p>당신의 사건은 PIA 탐정사 자격, 전직 경찰 출신 전문가가 상담부터 해결까지 '직접' 합니다.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Q. 상담을 받으면 반드시 의뢰를 해야 하나요?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>아닙니다. 상담은 사건을 진단하기 위한 최초의 행위입니다.</p>
+              <p>따라서 상담을 하였다고, 반드시 그 자리에서 의뢰하실 필요가 없습니다.</p>
+              <p>오히려 GT탐정사무소는 당신이 다른 곳과도 충분한 상담을 받아보길 권합니다.</p>
+              <p>그래야 GT탐정사무소가 얼마나 뛰어난지 체감할 수 있고, 당신의 선택에 후회가 없으니까요.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Q. 수임료가 너무 비싸지 않을까요?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>GT탐정사무소의 수임료는 결코 싸지 않습니다.</p>
+              <p>당장 수임만을 목적으로 저렴한 수임료를 제안하기보다 우리의 가치를 믿는 의뢰인에게 최선의 서비스를 제공하기 위한 적정 수임료를 제안합니다.</p>
+              <p>다만, 적정 수임료는 예상 소요 시간, 사건 난이도보다 당신의 사정을 최우선으로 고려하여 결정합니다.</p>
+              <p>그러니 너무 가슴 졸이며 혼자 고민 마시고, 지금 전화 주세요.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Q. 의뢰만 받고 사건을 대충 처리하는 건 아닌가요?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>GT탐정사무소에게 수임료는 '빛'입니다. 사건이 모두 마무리되고, 당신에게 "감사합니다"라는 말을 듣기 전까지는.</p>
+              <p>그래서 만약, 우리의 약속이 지켜지지 않는다면, 받은 수임료는 모두 돌려드리겠습니다.</p>
+              <p>그리고 명심하세요.</p>
+              <p>처음 상담한 탐정과 사건을 진행하는 탐정이 다른 곳은 피하는 게 좋습니다!</p>
+            </div></div>
+          </div>
+
+        </div><!-- /.faq-list -->
+      </div><!-- /.faq-inner -->
+    </section>
+
+    <!-- ========== [4] 업무절차 ========== -->
+    <section id="process">
+      <div class="process-inner">
+        <div class="section-header" data-animate>
+          <p class="section-label">How It Works</p>
+          <h2 class="section-title">업무절차</h2>
+          <p class="section-desc">GT탐정사무소는 체계적인 6단계 프로세스로<br />의뢰인의 사건을 처리합니다.</p>
+        </div>
+        <div class="process-steps">
+          <div class="process-step" data-animate>
+            <div class="step-num">01</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <h3 class="step-name">상담문의</h3>
+            <p class="step-desc">전화·카카오톡을 통한<br />무료 초기 상담</p>
+          </div>
+          <div class="process-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="process-step" data-animate>
+            <div class="step-num">02</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <h3 class="step-name">팀배정</h3>
+            <p class="step-desc">사건 유형에 맞는<br />전담 팀 편성</p>
+          </div>
+          <div class="process-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="process-step" data-animate>
+            <div class="step-num">03</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <h3 class="step-name">조사팀 배정</h3>
+            <p class="step-desc">현장 투입 전문 조사관<br />배치 및 계획 수립</p>
+          </div>
+          <div class="process-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="process-step" data-animate>
+            <div class="step-num">04</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3 class="step-name">최종결과 보고</h3>
+            <p class="step-desc">증거 자료 정리 및<br />의뢰인 보고</p>
+          </div>
+          <div class="process-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="process-step" data-animate>
+            <div class="step-num">05</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="step-name">종결</h3>
+            <p class="step-desc">사건 마무리 및<br />자료 보안 처리</p>
+          </div>
+          <div class="process-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="process-step" data-animate>
+            <div class="step-num">06</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            </div>
+            <h3 class="step-name">서비스 완료</h3>
+            <p class="step-desc">의뢰인 만족 확인 후<br />완전 종료</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== [5] GT탐정사무소를 찾는 3가지 이유 ========== -->
+    <section id="reasons">
+      <div class="reasons-inner">
+        <h2 class="reasons-title" data-animate>GT탐정사무소를 찾는<br />3가지 이유</h2>
+        <div class="reasons-grid">
+          <div class="reason-card" data-animate>
+            <div class="reason-icon">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z" />
+              </svg>
+            </div>
+            <h3 class="reason-name">월 수임건수 제한</h3>
+            <p class="reason-desc">GT탐정사무소는 당신에게 더 집중하기 위해 월 수임건수를 제한합니다. 조기에 월 수임건수가 마감될 수 있습니다.</p>
+          </div>
+          <div class="reason-card" data-animate>
+            <div class="reason-icon">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+              </svg>
+            </div>
+            <h3 class="reason-name">사건을 함께할 가이드</h3>
+            <p class="reason-desc">GT탐정사무소는 당신의 훌륭한 가이드입니다. 부담스럽지 않은 방법으로, 쉽고 빠르게 사건을 해결할 수 있는 방법을 찾아드리겠습니다.</p>
+          </div>
+          <div class="reason-card" data-animate>
+            <div class="reason-icon">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <h3 class="reason-name">사건별 맞춤 전략</h3>
+            <p class="reason-desc">똑같은 사건은 없습니다. GT탐정사무소는 각자의 상황에 맞는 진짜 전략을 만듭니다.</p>
+          </div>
+        </div>
+        <div class="reasons-cta-wrap" data-animate>
+          <a href="#contact" class="reasons-cta">바로 상담하기 &gt;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== [6] 주요업무 ========== -->
+    <section id="services">
+      <div class="services-inner">
+        <div class="section-header" data-animate>
+          <p class="section-label">Our Services</p>
+          <h2 class="section-title">주요업무</h2>
+          <p class="section-desc">기술력과 노하우를 기반으로 다양한 서비스를 제공합니다.</p>
+        </div>
+        <div class="services-grid">
+
+          <!-- 1. 불법도감청 -->
+          <div class="service-card" data-animate>
+            <img src="assets/services/service-1.jpg" alt="불법도감청 탐지" class="service-img" />
+            <div class="service-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-name">불법도감청</h3>
+              <p class="service-tags">#몰래카메라 #도청장치 #전파탐지</p>
+              <p class="service-desc">전파관리소장 허가를 받은 전문 장비로 불법 도감청 장치를 탐지·제거합니다.</p>
+              <a href="#contact" class="service-cta">상담문의</a>
+            </div>
+          </div>
+
+          <!-- 2. 경호 -->
+          <div class="service-card" data-animate>
+            <img src="assets/services/service-2.jpg" alt="경호 서비스" class="service-img" />
+            <div class="service-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-name">경호·경비</h3>
+              <p class="service-tags">#개인경호 #기업경호 #행사경호</p>
+              <p class="service-desc">경비업법 지방경찰청장 허가를 받은 전문 경호팀이 고객님의 안전을 지킵니다.</p>
+              <a href="#contact" class="service-cta">상담문의</a>
+            </div>
+          </div>
+
+          <!-- 3. 개인문제 -->
+          <div class="service-card" data-animate>
+            <img src="assets/services/service-3.jpg" alt="개인문제 조사" class="service-img" />
+            <div class="service-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-name">개인문제</h3>
+              <p class="service-tags">#부부 #친인척 #가족 #지인</p>
+              <p class="service-desc">개인적인 분쟁과 갈등 상황에서 신속하고 합법적인 해결책을 찾아드립니다.</p>
+              <a href="#contact" class="service-cta">상담문의</a>
+            </div>
+          </div>
+
+          <!-- 4. 외도조사 -->
+          <div class="service-card" data-animate>
+            <img src="assets/services/service-4.jpg" alt="외도조사" class="service-img" />
+            <div class="service-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-name">외도조사</h3>
+              <p class="service-tags">#배우자 #연인 #불륜 #증거수집</p>
+              <p class="service-desc">합법적인 방법으로 명확한 증거를 수집하여 법적 절차에 활용할 수 있도록 지원합니다.</p>
+              <a href="#contact" class="service-cta">상담문의</a>
+            </div>
+          </div>
+
+          <!-- 5. 실종자찾기 -->
+          <div class="service-card" data-animate>
+            <img src="assets/services/service-5.jpg" alt="실종자찾기" class="service-img" />
+            <div class="service-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-name">실종자찾기</h3>
+              <p class="service-tags">#가출인 #행방불명 #소재파악</p>
+              <p class="service-desc">전문 조사관이 신속하게 실종자의 행방을 추적하고 소재를 파악합니다.</p>
+              <a href="#contact" class="service-cta">상담문의</a>
+            </div>
+          </div>
+
+          <!-- 6. 디지털포렌식 -->
+          <div class="service-card" data-animate>
+            <img src="assets/services/service-6.jpg" alt="디지털포렌식" class="service-img" />
+            <div class="service-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-name">디지털포렌식</h3>
+              <p class="service-tags">#데이터복구 #증거분석 #사이버조사</p>
+              <p class="service-desc">디지털 기기에서 삭제된 데이터를 복구하고 증거를 분석하여 법적 효력을 갖춥니다.</p>
+              <a href="#contact" class="service-cta">상담문의</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== [6-2] 디지털포렌식 집중 섹션 ========== -->
+    <section id="digital-forensics">
+      <div class="forensics-inner">
+        <div class="forensics-content" data-animate>
+          <p class="section-label">Core Service</p>
+          <h2 class="forensics-title">디지털포렌식,<br />GT탐정사무소의 핵심 기술</h2>
+          <p class="forensics-desc">
+            단순한 탐정을 넘어, 디지털 증거로 진실을 밝힙니다.<br />
+            삭제된 데이터도, 숨겨진 기록도 GT탐정사무소가 찾아냅니다.
+          </p>
+          <ul class="forensics-features">
+            <li>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <div><strong>삭제 데이터 복구</strong><p>스마트폰·PC에서 삭제된 문자, 사진, 통화기록을 복원합니다.</p></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <div><strong>디지털 증거 분석</strong><p>카카오톡·SNS·이메일 등 디지털 활동 기록을 법적 증거로 분석합니다.</p></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <div><strong>사이버 범죄 조사</strong><p>명예훼손, 불법촬영, 개인정보 유출 등 사이버 범죄를 추적합니다.</p></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <div><strong>법적 효력 보고서 제공</strong><p>수집·분석된 디지털 증거를 소송에 활용 가능한 공식 보고서로 제출합니다.</p></div>
+            </li>
+          </ul>
+          <a href="#contact" class="forensics-cta">디지털포렌식 상담하기</a>
+        </div>
+        <div class="forensics-img-wrap" data-animate>
+          <img src="assets/services/service-6.jpg" alt="디지털포렌식" class="forensics-img" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== [7] 자격증 ========== -->
+    <section id="certifications">
+      <div class="cert-inner">
+        <div class="section-header" data-animate>
+          <p class="section-label">Certification</p>
+          <h2 class="section-title">자격증</h2>
+          <p class="section-desc">
+            GT탐정사무소는 공식적인 사업자등록이 완료되어 있으며,<br />
+            전 직원 한국공인탐정협회/PIA 탐정사자격증을 보유하여<br />
+            안전하고 신뢰할 수 있는 업체입니다.
+          </p>
+        </div>
+        <div class="cert-track-wrap">
+          <div class="cert-track">
+            <div class="cert-card"><img src="assets/cert-1.jpg" alt="자격증 1" /></div>
+            <div class="cert-card"><img src="assets/cert-2.jpg" alt="자격증 2" /></div>
+            <div class="cert-card"><img src="assets/cert-3.jpg" alt="자격증 3" /></div>
+            <div class="cert-card"><img src="assets/cert-4.jpg" alt="자격증 4" /></div>
+            <!-- 무한 루프용 복제 -->
+            <div class="cert-card"><img src="assets/cert-1.jpg" alt="자격증 1" /></div>
+            <div class="cert-card"><img src="assets/cert-2.jpg" alt="자격증 2" /></div>
+            <div class="cert-card"><img src="assets/cert-3.jpg" alt="자격증 3" /></div>
+            <div class="cert-card"><img src="assets/cert-4.jpg" alt="자격증 4" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== [8] 보험계약증서 ========== -->
+    <section id="insurance">
+      <div class="insurance-inner">
+        <!-- 왼쪽: 후킹 카피 + 소구점 -->
+        <div class="insurance-copy" data-animate>
+          <p class="section-label">Insurance</p>
+          <h2 class="insurance-title">GT탐정사무소,<br />안심하고 맡기세요.</h2>
+          <p class="insurance-lead">
+            의뢰인의 소중한 사건, 만약의 상황에도<br />
+            전문인 배상책임보험으로 완벽하게 보호합니다.
+          </p>
+          <ul class="insurance-points">
+            <li>
+              <span class="point-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              </span>
+              <div>
+                <strong>전문인 배상책임보험 가입 완료</strong>
+                <p>탐정협회 공식 전문인 배상책임보험으로 의뢰인을 보호합니다.</p>
+              </div>
+            </li>
+            <li>
+              <span class="point-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              </span>
+              <div>
+                <strong>합법적 조사·증거 보장</strong>
+                <p>모든 조사는 법률 테두리 안에서 진행되어 법적 효력이 인정됩니다.</p>
+              </div>
+            </li>
+            <li>
+              <span class="point-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              </span>
+              <div>
+                <strong>의뢰인 정보 100% 기밀 보호</strong>
+                <p>상담부터 종결까지 모든 정보는 철저히 암호화·관리됩니다.</p>
+              </div>
+            </li>
+            <li>
+              <span class="point-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              </span>
+              <div>
+                <strong>공식 사업자 등록 업체</strong>
+                <p>정식 허가·등록된 탐정사무소로 신뢰할 수 있는 파트너입니다.</p>
+              </div>
+            </li>
+          </ul>
+          <a href="#contact" class="insurance-cta">지금 바로 상담하기</a>
+        </div>
+        <!-- 오른쪽: 보험증서 이미지 -->
+        <div class="insurance-img-wrap" data-animate>
+          <img src="assets/insurance.jpg" alt="전문인 배상책임보험 가입증명서" class="insurance-img" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== [9] 상담문의 ========== -->
+    <section id="contact">
+      <div class="contact-inner">
+        <!-- 왼쪽 -->
+        <div class="contact-left">
+          <p class="contact-tag">Contact Us</p>
+          <h2 class="contact-heading">오직 당신만을 위한<br />GT탐정사무소</h2>
+          <p class="contact-sub">사건의 크고 작음에 관계없이<br />모든 의뢰인의 사건에 최선을 다합니다.</p>
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <span class="contact-info-label">대표번호</span>
+              <a href="tel:010-4274-2882" class="contact-info-val">010-4274-2882</a>
+            </div>
+            <div class="contact-info-item">
+              <span class="contact-info-label">카카오톡</span>
+              <span class="contact-info-val">gtnet77</span>
+            </div>
+            <div class="contact-info-item">
+              <span class="contact-info-label">텔레그램</span>
+              <span class="contact-info-val">gtnet77</span>
+            </div>
+          </div>
+        </div>
+        <!-- 오른쪽: 폼 -->
+        <div class="contact-right">
+          <form class="contact-form" id="contactForm" novalidate>
+
+            <!-- 서비스 선택 토글 -->
+            <div class="form-group">
+              <label class="form-label">문의 유형 <span class="form-required">*</span></label>
+              <p class="toggle-hint">중복 선택 가능합니다.</p>
+              <div class="service-toggle-group">
+                <div class="service-toggle-row">
+                  <button type="button" class="service-toggle" data-value="불법도감청">불법도감청</button>
+                  <button type="button" class="service-toggle" data-value="경호·경비">경호·경비</button>
+                  <button type="button" class="service-toggle" data-value="개인문제">개인문제</button>
+                </div>
+                <div class="service-toggle-row">
+                  <button type="button" class="service-toggle" data-value="외도조사">외도조사</button>
+                  <button type="button" class="service-toggle" data-value="실종자찾기">실종자찾기</button>
+                  <button type="button" class="service-toggle" data-value="디지털포렌식">디지털포렌식</button>
+                  <button type="button" class="service-toggle" data-value="기타">기타</button>
+                </div>
+              </div>
+              <input type="hidden" id="selectedServices" name="services" />
+            </div>
+
+            <!-- 이름 -->
+            <div class="form-group">
+              <label class="form-label" for="contactName">이름 <span class="form-required">*</span></label>
+              <input type="text" id="contactName" name="name" class="form-input" placeholder="성함을 입력해 주세요" maxlength="20" />
+            </div>
+
+            <!-- 연락처 -->
+            <div class="form-group">
+              <label class="form-label" for="contactPhone">연락처 <span class="form-required">*</span></label>
+              <input type="tel" id="contactPhone" name="phone" class="form-input" placeholder="010-0000-0000" maxlength="14" />
+            </div>
+
+            <!-- 내용 -->
+            <div class="form-group">
+              <label class="form-label" for="contactMessage">문의 내용 <span class="form-required">*</span></label>
+              <textarea id="contactMessage" name="message" class="form-textarea" placeholder="문의하실 내용을 자유롭게 작성해 주세요." rows="5"></textarea>
+            </div>
+
+            <!-- 개인정보 수집 및 이용 동의 -->
+            <div class="form-group">
+              <div class="privacy-box">
+                <p class="privacy-title">개인정보 수집 및 이용 안내</p>
+                <div class="privacy-scroll">
+                  <p>수집 항목: 이름, 연락처, 문의 내용</p>
+                  <p>수집 목적: 상담 문의 접수 및 회신</p>
+                  <p>보유 기간: 상담 종료 후 즉시 파기</p>
+                  <p>GT탐정사무소는 의뢰인의 개인정보를 제3자에게 제공하지 않으며, 상담 목적 외 사용하지 않습니다. 수집된 정보는 보안 처리되어 안전하게 관리됩니다. 개인정보 제공에 동의하지 않을 권리가 있으며, 동의 거부 시 상담 서비스 이용이 제한될 수 있습니다.</p>
+                </div>
+              </div>
+              <label class="privacy-check-label">
+                <input type="checkbox" id="privacyCheck" name="privacy" class="privacy-check" />
+                <span class="privacy-check-text">개인정보 수집 및 이용에 동의합니다. <span class="form-required">(필수)</span></span>
+              </label>
+            </div>
+
+            <button type="submit" class="form-submit">상담 신청하기</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== [10] 공공기관 로고 슬라이드 ========== -->
+    <section id="partners">
+      <div class="partners-inner">
+        <p class="partners-label" data-animate>공공기관 파트너십</p>
+        <h2 class="partners-title" data-animate>GT탐정사무소와 함께하는 기관</h2>
+      </div>
+
+      <div class="logos-slider">
+        <div class="logos-wrapper">
+        <!-- 트랙 A (원본) -->
+        <div class="logos-track">
+          <div class="logo-item">
+            <img src="assets/police-logo.jpg" alt="경찰청" />
+            <span>경찰청</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-police.jpg" alt="공정거래위원회" />
+            <span>공정거래위원회</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-lawhome.jpg" alt="검찰" />
+            <span>검찰</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-prosecution.jpg" alt="대법원" />
+            <span>대법원</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-ftc.jpg" alt="한국가정법률상담소" />
+            <span>한국가정법률상담소</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-court.jpg" alt="한국소비자원" />
+            <span>한국소비자원</span>
+          </div>
+        </div>
+        <!-- 트랙 B (무한루프용 복제) -->
+        <div class="logos-track" aria-hidden="true">
+          <div class="logo-item">
+            <img src="assets/police-logo.jpg" alt="경찰청" />
+            <span>경찰청</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-police.jpg" alt="공정거래위원회" />
+            <span>공정거래위원회</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-lawhome.jpg" alt="검찰" />
+            <span>검찰</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-prosecution.jpg" alt="대법원" />
+            <span>대법원</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-ftc.jpg" alt="한국가정법률상담소" />
+            <span>한국가정법률상담소</span>
+          </div>
+          <div class="logo-item">
+            <img src="assets/partner-logos/logo-court.jpg" alt="한국소비자원" />
+            <span>한국소비자원</span>
+          </div>
+        </div>
+        </div><!-- /.logos-wrapper -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== [11] 푸터 ========== -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="footer-inner">
+        <div class="footer-info">
+          <img src="assets/logo-white.png" alt="GT탐정사무소" class="footer-logo" />
+          <p>이메일 : gtnet77@gmail.com</p>
+          <p>상호명 : 지티(GT)탐정사무소 &nbsp;&nbsp; 사업자등록번호 : 383-73-00573</p>
+          <p>사업장 소재지 : 서울특별시 강남구 강남대로114길 18, 4층 492호(논현동, 월스빌딩)</p>
+          <p>대표자명 : 김세진</p>
+          <p>대표번호 : 010-4274-2882</p>
+        </div>
+        <div class="footer-social">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/gtnet77/" target="_blank" rel="noopener" aria-label="인스타그램">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <!-- KakaoTalk -->
+          <a href="http://pf.kakao.com/_XVIjX" target="_blank" rel="noopener" aria-label="카카오톡">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.69 2 11.25c0 2.85 1.72 5.35 4.33 6.88-.18.65-.67 2.37-.77 2.74-.12.46.17.45.36.33.15-.1 2.36-1.6 3.32-2.25.57.08 1.15.12 1.76.12 5.52 0 10-3.69 10-8.25C21 6.69 17.52 3 12 3z"/></svg>
+          </a>
+          <!-- Telegram -->
+          <a href="https://t.me/gtnet77" target="_blank" rel="noopener" aria-label="텔레그램">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-inner">
+        <p>Copyright &copy; 2026 GT탐정사무소 All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== PC 플로팅 액션 버튼 ========== -->
+  <div class="fab-wrap" id="fabWrap">
+    <div class="fab-group">
+      <a href="tel:01042742882" class="fab-item" aria-label="상담전화">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>상담전화</span>
+      </a>
+      <a href="http://pf.kakao.com/_XVIjX" target="_blank" rel="noopener" class="fab-item" aria-label="카카오톡">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.69 2 11.25c0 2.85 1.72 5.35 4.33 6.88-.18.65-.67 2.37-.77 2.74-.12.46.17.45.36.33.15-.1 2.36-1.6 3.32-2.25.57.08 1.15.12 1.76.12 5.52 0 10-3.69 10-8.25C22 6.69 17.52 3 12 3z"/></svg>
+        <span>카카오톡</span>
+      </a>
+      <a href="https://t.me/gtnet77" target="_blank" rel="noopener" class="fab-item" aria-label="텔레그램">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        <span>텔레그램</span>
+      </a>
+    </div>
+    <button class="fab-top" id="fabTop" aria-label="맨 위로">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+  </div>
+
+  <!-- ========== 모바일 하단 고정바 ========== -->
+  <div class="mobile-bar">
+    <a href="tel:01042742882" class="mobile-bar-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>상담전화</span>
+    </a>
+    <a href="http://pf.kakao.com/_XVIjX" target="_blank" rel="noopener" class="mobile-bar-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.69 2 11.25c0 2.85 1.72 5.35 4.33 6.88-.18.65-.67 2.37-.77 2.74-.12.46.17.45.36.33.15-.1 2.36-1.6 3.32-2.25.57.08 1.15.12 1.76.12 5.52 0 10-3.69 10-8.25C22 6.69 17.52 3 12 3z"/></svg>
+      <span>카카오톡</span>
+    </a>
+    <a href="https://t.me/gtnet77" target="_blank" rel="noopener" class="mobile-bar-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      <span>텔레그램</span>
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
