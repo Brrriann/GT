@@ -1180,46 +1180,45 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 #certifications .section-header { padding: 0 24px; }
 
 .cert-inner {
-  max-width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-.cert-track-wrap {
+.cert-slider-outer {
   overflow: hidden;
-  padding: 40px 0;
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  margin-top: 48px;
+  padding-bottom: 16px;
 }
 
 .cert-track {
   display: flex;
-  gap: 28px;
-  width: max-content;
-  animation: cert-scroll 18s linear infinite;
-}
-.cert-track:hover { animation-play-state: paused; }
-
-@keyframes cert-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  gap: 24px;
+  padding-left: 70px;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
-.cert-card {
-  width: 400px;
+.cert-item {
+  flex: 0 0 360px;
   background: var(--color-white);
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-  flex-shrink: 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.cert-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-}
-.cert-card img {
+.cert-item img {
   width: 100%;
   height: auto;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .cert-track {
+    gap: 12px;
+    padding-left: 16px;
+  }
+  .cert-item {
+    flex: 0 0 calc(50vw - 16px);
+  }
 }
 
 /* ===== [8] 보험계약증서 ===== */

@@ -274,3 +274,49 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     updateFaqZoom();
   });
 });
+
+/* ===== 자격증 슬라이더 (5초 자동 전환) ===== */
+(function () {
+  const track = document.getElementById('certTrack');
+  if (!track) return;
+
+  const items = Array.from(track.querySelectorAll('.cert-item'));
+  const total = items.length;
+  let current = 0;
+  let timer = null;
+
+  function getVisible() {
+    return window.innerWidth < 768 ? 2 : 3;
+  }
+
+  function getStep() {
+    const w = items[0].getBoundingClientRect().width;
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
+    return w + gap;
+  }
+
+  function goTo(idx) {
+    const vis = getVisible();
+    const max = total - vis;
+    if (idx > max) idx = 0;
+    if (idx < 0) idx = max;
+    current = idx;
+    track.style.transform = 'translateX(-' + (current * getStep()) + 'px)';
+  }
+
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(function () { goTo(current + 1); }, 5000);
+  }
+
+  startAuto();
+
+  window.addEventListener('resize', function () {
+    track.style.transition = 'none';
+    goTo(0);
+    requestAnimationFrame(function () {
+      track.style.transition = '';
+      startAuto();
+    });
+  });
+}());
