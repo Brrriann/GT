@@ -1169,6 +1169,11 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   display: none;
 }
 
+/* 보험 섹션 모바일 전용 문서: 데스크탑에서는 숨김 */
+.insurance-docs-mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .forensics-inner { grid-template-columns: 1fr; gap: 24px; }
   /* 모바일: 오른쪽 독립 이미지 숨기고 인라인 이미지 표시 */
@@ -1354,8 +1359,13 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .insurance-docs {
+  /* 모바일: 오른쪽 독립 문서 숨기고 인라인 문서 표시 */
+  .insurance-docs { display: none; }
+  .insurance-docs-mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
+    margin: 20px 0;
   }
 }
 
