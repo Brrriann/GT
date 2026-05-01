@@ -423,7 +423,8 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   }
 
   .nav-menu { display: none; }
-  #navbar.scrolled .nav-inner { position: relative; }
+  #navbar.scrolled .nav-inner { position: relative; justify-content: flex-end; }
+  #navbar.scrolled .nav-hamburger { margin-left: 0; }
   #navbar.scrolled .nav-logo {
     position: absolute;
     left: 50%;
