@@ -340,9 +340,9 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 /* ===== 프로필 카드: 가로형 직사각형, 사진 위에 텍스트 오버레이 ===== */
 .profile-card {
   width: 70%;
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: rgba(255,255,255,0.01);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
   border-radius: 0;
   display: none;
   overflow: hidden;
