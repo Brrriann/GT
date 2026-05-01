@@ -1622,7 +1622,7 @@ button:focus-visible {
   height: 56px;
   width: auto;
   object-fit: contain;
-  filter: grayscale(100%);
+  filter: grayscale(0%);
   opacity: 0.6;
   transition: filter 0.3s, opacity 0.3s;
 }
