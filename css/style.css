@@ -1234,12 +1234,17 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 
 @media (max-width: 768px) {
+  .cert-slider-outer {
+    /* 모바일: 여백 8vw로 줄여 카드 30% 확대 (15vw→8vw) */
+    margin-left: 8vw;
+    margin-right: 8vw;
+  }
   .cert-track {
     gap: 12px;
   }
   .cert-item {
-    /* 모바일: 70vw 슬라이더 내 2장 + 양쪽 25px 모서리 노출 */
-    flex: 0 0 calc((70vw - 86px) / 2);
+    /* 모바일: 84vw 슬라이더 내 2장 + 양쪽 25px 모서리 노출 */
+    flex: 0 0 calc((84vw - 86px) / 2);
   }
 }
 
