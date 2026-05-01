@@ -1186,7 +1186,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 
 .cert-slider-outer {
   overflow: hidden;
-  margin-top: 48px;
+  margin: 48px 15vw 0;
   padding-bottom: 16px;
 }
 
@@ -1197,8 +1197,8 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 
 .cert-item {
-  /* PC: 3장 + 양쪽 40px 여백 노출 (gap 24px × 4 = 96px, partial 40px × 2 = 80px) */
-  flex: 0 0 calc((100vw - 176px) / 3);
+  /* PC: 70vw 슬라이더 내 3장 + 양쪽 40px 모서리 노출 */
+  flex: 0 0 calc((70vw - 176px) / 3);
   background: var(--color-white);
   border-radius: 4px;
   overflow: hidden;
@@ -1215,8 +1215,8 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
     gap: 12px;
   }
   .cert-item {
-    /* 모바일: 2장 + 양쪽 25px 여백 노출 (gap 12px × 3 = 36px, partial 25px × 2 = 50px) */
-    flex: 0 0 calc((100vw - 86px) / 2);
+    /* 모바일: 70vw 슬라이더 내 2장 + 양쪽 25px 모서리 노출 */
+    flex: 0 0 calc((70vw - 86px) / 2);
   }
 }
 
