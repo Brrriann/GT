@@ -426,6 +426,8 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   .hero-title { font-size: 52px; }
   .hero-inner { padding: 60px 20px 48px; }
   .profile-img-wrap { width: 90px; height: 110px; }
+  .profile-card { width: 100%; }
+  .hero-right { width: 100%; }
 }
 
 @media (max-width: 480px) {
