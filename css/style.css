@@ -1301,24 +1301,34 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 .insurance-cta:hover { background: var(--color-cta); }
 
-.insurance-img-wrap {
-  position: relative;
+.insurance-docs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
 }
-.insurance-img-wrap::before {
-  content: '';
-  position: absolute;
-  inset: -12px -12px 12px 12px;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  z-index: 0;
+
+.insurance-doc-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
-.insurance-img {
-  position: relative;
-  z-index: 1;
+
+.insurance-doc-item img {
   width: 100%;
   height: auto;
   display: block;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+  border-radius: 4px;
+}
+
+.insurance-doc-item p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 768px) {
@@ -1326,7 +1336,9 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .insurance-img-wrap::before { display: none; }
+  .insurance-docs {
+    gap: 12px;
+  }
 }
 
 /* ===== [9] 상담문의 ===== */
