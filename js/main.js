@@ -63,9 +63,14 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeSideMenu();
 });
 
-/* ===== 히어로 프로필 자동 전환 (1.5초, 자연스러운 fade) ===== */
+/* ===== 히어로 프로필 자동 전환 ===== */
 const cards = document.querySelectorAll('.profile-card');
 const dots  = document.querySelectorAll('.dot');
+const heroTitle = document.querySelector('.hero-title');
+const heroSub   = document.querySelector('.hero-sub');
+const heroOverlayTrust  = document.getElementById('heroOverlayTrust');
+const heroOverlayExpert = document.getElementById('heroOverlayExpert');
+const heroOverlays = [heroOverlayTrust, heroOverlayExpert];
 let current = 0;
 let profileTimer;
 let isTransitioning = false;
@@ -76,17 +81,33 @@ function showProfile(idx) {
 
   const prev = current;
   current = idx;
+  const card = cards[current];
 
-  // fade out current
+  // fade out card + text
   cards[prev].style.opacity = '0';
   dots[prev].classList.remove('active');
+  if (heroTitle) heroTitle.style.opacity = '0';
+  if (heroSub)   heroSub.style.opacity   = '0';
+
+  // switch background overlay
+  heroOverlays.forEach((ov, i) => {
+    if (ov) ov.classList.toggle('active', i === current);
+  });
 
   setTimeout(() => {
     cards[prev].style.display = 'none';
     cards[prev].classList.remove('active');
     cards[prev].style.opacity = '';
 
-    // show next card, start at 0, then animate to 1
+    // update hero text
+    if (heroTitle && card.dataset.title) heroTitle.textContent = card.dataset.title;
+    if (heroSub   && card.dataset.sub)   heroSub.innerHTML     = card.dataset.sub;
+
+    // fade text back in
+    if (heroTitle) heroTitle.style.opacity = '1';
+    if (heroSub)   heroSub.style.opacity   = '1';
+
+    // show next card
     cards[current].classList.add('active');
     cards[current].style.display = 'block';
     cards[current].style.opacity = '0';
@@ -212,31 +233,6 @@ const observer = new IntersectionObserver(entries => {
 
 animItems.forEach(el => observer.observe(el));
 
-/* ===== 히어로 마우스 패럴랙스 (PC only) ===== */
-const heroBg = document.getElementById('heroBg');
-if (heroBg && window.matchMedia('(min-width: 769px)').matches) {
-  const heroEl = document.getElementById('hero');
-  let rafId;
-
-  heroEl.addEventListener('mousemove', e => {
-    cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(() => {
-      const rect = heroEl.getBoundingClientRect();
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-      const dx = (e.clientX - rect.left - cx) / cx; // -1 ~ 1
-      const dy = (e.clientY - rect.top  - cy) / cy;
-      heroBg.style.transform = `translate(${dx * -18}px, ${dy * -12}px)`;
-    });
-  });
-
-  heroEl.addEventListener('mouseleave', () => {
-    cancelAnimationFrame(rafId);
-    heroBg.style.transition = 'transform 0.6s ease-out';
-    heroBg.style.transform = 'translate(0, 0)';
-    setTimeout(() => { heroBg.style.transition = 'transform 0.08s ease-out'; }, 600);
-  });
-}
 
 /* ===== 맨 위로 버튼 ===== */
 const fabTop = document.getElementById('fabTop');

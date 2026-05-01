@@ -225,12 +225,10 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 
 .hero-bg {
   position: absolute;
-  inset: -40px;
+  inset: 0;
   background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');
   background-size: cover;
   background-position: center 30%;
-  will-change: transform;
-  transition: transform 0.08s ease-out;
   z-index: 0;
 }
 
@@ -242,11 +240,26 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   position: absolute;
   inset: 0;
   z-index: 1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.hero-overlay.active {
+  opacity: 1;
+}
+.hero-overlay-trust {
   background: linear-gradient(
     120deg,
     rgba(15, 23, 42, 0.82) 0%,
     rgba(15, 23, 42, 0.55) 55%,
     rgba(15, 23, 42, 0.70) 100%
+  );
+}
+.hero-overlay-expert {
+  background: linear-gradient(
+    120deg,
+    rgba(5, 10, 35, 0.90) 0%,
+    rgba(5, 10, 35, 0.62) 55%,
+    rgba(5, 10, 35, 0.82) 100%
   );
 }
 
@@ -282,6 +295,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   letter-spacing: -0.03em;
   margin-bottom: 24px;
   color: var(--color-white);
+  transition: opacity 0.35s ease;
 }
 .hero-sub {
   font-size: 17px;
@@ -290,6 +304,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   color: rgba(255,255,255,0.80);
   margin-bottom: 40px;
   max-width: 420px;
+  transition: opacity 0.35s ease;
 }
 .hero-cta {
   display: inline-block;
@@ -317,9 +332,9 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 /* ===== 프로필 카드: 가로형 직사각형, 사진 위에 텍스트 오버레이 ===== */
 .profile-card {
   width: 100%;
-  background: rgba(255,255,255,0.28);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 0;
   display: none;
   overflow: hidden;

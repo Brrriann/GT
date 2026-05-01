@@ -52,7 +52,8 @@
   <!-- ========== [3] 히어로 섹션 (법무법인여온 스타일) ========== -->
   <section id="hero">
     <div class="hero-bg" id="heroBg"></div>
-    <div class="hero-overlay"></div>
+    <div class="hero-overlay hero-overlay-trust active" id="heroOverlayTrust"></div>
+    <div class="hero-overlay hero-overlay-expert" id="heroOverlayExpert"></div>
     <div class="hero-inner">
       <!-- 왼쪽: 슬로건 + 감성문구 + CTA -->
       <div class="hero-left">
@@ -65,16 +66,20 @@
         <a href="#contact" class="hero-cta">바로 상담하기</a>
       </div>
 
-      <!-- 오른쪽: 탐정 프로필 카드 (1초마다 전환) -->
+      <!-- 오른쪽: 탐정 프로필 카드 -->
       <div class="hero-right">
-        <!-- 프로필 1: 김세진 -->
-        <div class="profile-card active" id="profile-0">
-          <img src="assets/profile-1.png" alt="탐정사 김세진" class="profile-img-full" />
+        <!-- 프로필 1: 김세진 (신뢰) -->
+        <div class="profile-card active" id="profile-0"
+             data-title="신뢰"
+             data-sub="우리는 의뢰인의 신뢰와 만족을 최우선으로 합니다.<br />합법적이고 신뢰할 수 있는 탐정 서비스.">
+          <img src="assets/profile-sejin-new.jpg" alt="탐정사 김세진" class="profile-img-full" />
         </div>
 
-        <!-- 프로필 2: 김민재 -->
-        <div class="profile-card" id="profile-1">
-          <img src="assets/profile-2.png" alt="前 경찰수사관 김민재" class="profile-img-full" />
+        <!-- 프로필 2: 김민재 (전문성) -->
+        <div class="profile-card" id="profile-1"
+             data-title="전문성"
+             data-sub="서울 경찰청 출신 탐정사가 직접 수사에 임합니다.<br />법과 절차에 기반한 체계적인 탐정 서비스.">
+          <img src="assets/profile-minjae-new.jpg" alt="前 경찰수사관 김민재" class="profile-img-full" />
         </div>
 
         <!-- 전환 도트 인디케이터 -->
