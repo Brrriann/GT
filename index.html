@@ -623,20 +623,21 @@
         <div class="contact-right">
           <form class="contact-form" id="contactForm" novalidate>
 
-            <!-- 서비스 선택 토글 -->
+            <!-- 서비스 선택 드롭다운 -->
             <div class="form-group">
-              <label class="form-label">문의 유형 <span class="form-required">*</span></label>
-              <p class="toggle-hint">중복 선택 가능합니다.</p>
-              <div class="service-toggle-scroll">
-                <button type="button" class="service-toggle" data-value="불법도감청">불법도감청</button>
-                <button type="button" class="service-toggle" data-value="경호·경비">경호·경비</button>
-                <button type="button" class="service-toggle" data-value="개인문제">개인문제</button>
-                <button type="button" class="service-toggle" data-value="외도조사">외도조사</button>
-                <button type="button" class="service-toggle" data-value="실종자찾기">실종자찾기</button>
-                <button type="button" class="service-toggle" data-value="디지털포렌식">디지털포렌식</button>
-                <button type="button" class="service-toggle" data-value="기타">기타</button>
+              <label class="form-label" for="selectedServices">문의 유형 <span class="form-required">*</span></label>
+              <div class="select-wrapper">
+                <select id="selectedServices" name="services" class="form-select">
+                  <option value="">(선택)</option>
+                  <option value="개인/가정업무">개인/가정업무</option>
+                  <option value="VIP업무">VIP업무</option>
+                  <option value="민/형사 증거수집">민/형사 증거수집</option>
+                  <option value="특수업무">특수업무</option>
+                  <option value="기업업무">기업업무</option>
+                  <option value="해외업무">해외업무</option>
+                  <option value="기타">기타</option>
+                </select>
               </div>
-              <input type="hidden" id="selectedServices" name="services" />
             </div>
 
             <!-- 이름 -->

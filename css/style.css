@@ -1508,6 +1508,41 @@ a.contact-info-val:hover { color: #60A5FA; }
 .form-textarea::placeholder { color: var(--color-muted); }
 .form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 
+/* 서비스 드롭다운 */
+.select-wrapper { position: relative; }
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--color-muted);
+  pointer-events: none;
+}
+.form-select {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-cta);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  background: var(--color-white);
+  font-family: var(--font-main);
+  font-size: 15px;
+  color: var(--color-muted);
+  outline: none;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.form-select.has-value { color: var(--color-text); }
+.form-select:focus { border-color: var(--color-cta); }
+
 /* 서비스 토글 */
 .toggle-hint {
   font-size: 13px;

@@ -147,19 +147,13 @@ dots.forEach(dot => {
 
 startProfileCycle();
 
-/* ===== 상담문의: 서비스 토글 ===== */
-const serviceToggles = document.querySelectorAll('.service-toggle');
-const selectedServicesInput = document.getElementById('selectedServices');
-
-serviceToggles.forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('active');
-    const selected = [...serviceToggles]
-      .filter(b => b.classList.contains('active'))
-      .map(b => b.dataset.value);
-    if (selectedServicesInput) selectedServicesInput.value = selected.join(', ');
+/* ===== 상담문의: 서비스 드롭다운 ===== */
+const serviceSelect = document.getElementById('selectedServices');
+if (serviceSelect) {
+  serviceSelect.addEventListener('change', () => {
+    serviceSelect.classList.toggle('has-value', serviceSelect.value !== '');
   });
-});
+}
 
 /* ===== 상담문의: 전화번호 자동 하이픈 ===== */
 const phoneInput = document.getElementById('contactPhone');
