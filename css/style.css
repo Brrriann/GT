@@ -1193,8 +1193,6 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 .cert-track {
   display: flex;
   gap: 24px;
-  padding-left: 70px;
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
@@ -1214,7 +1212,6 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 @media (max-width: 768px) {
   .cert-track {
     gap: 12px;
-    padding-left: 16px;
   }
   .cert-item {
     flex: 0 0 calc(50vw - 16px);

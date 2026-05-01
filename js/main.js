@@ -275,48 +275,64 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-/* ===== 자격증 슬라이더 (5초 자동 전환) ===== */
+/* ===== 자격증 슬라이더 (5초마다 1장 왼쪽 무한 반복) ===== */
 (function () {
-  const track = document.getElementById('certTrack');
+  var track = document.getElementById('certTrack');
   if (!track) return;
 
-  const items = Array.from(track.querySelectorAll('.cert-item'));
-  const total = items.length;
-  let current = 0;
-  let timer = null;
+  var origItems = Array.from(track.querySelectorAll('.cert-item'));
+  var total = origItems.length; // 6
 
-  function getVisible() {
-    return window.innerWidth < 768 ? 2 : 3;
+  // 왼쪽 여백용: 마지막 카드 clone을 맨 앞에 삽입
+  track.prepend(origItems[total - 1].cloneNode(true));
+  // 무한루프용: 전체 clone을 뒤에 추가
+  origItems.forEach(function (item) {
+    track.appendChild(item.cloneNode(true));
+  });
+  // 결과: [6c, 1, 2, 3, 4, 5, 6, 1c, 2c, 3c, 4c, 5c, 6c]
+
+  var GAP = 24;
+  var PARTIAL = 50;    // 왼쪽에 보일 이전 카드 너비(px)
+  var TRANS_MS = 700;  // 슬라이드 전환 시간(ms)
+  var INTERVAL = 5000; // 자동 전환 간격(ms)
+
+  var pos, loopStart, loopEnd, step, timer;
+
+  function init() {
+    step = origItems[0].offsetWidth + GAP;
+    loopStart = origItems[0].offsetWidth - PARTIAL; // = itemW - 50
+    loopEnd = loopStart + total * step;
+    pos = loopStart;
+    track.style.transition = 'none';
+    track.style.transform = 'translateX(-' + pos + 'px)';
   }
 
-  function getStep() {
-    const w = items[0].getBoundingClientRect().width;
-    const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
-    return w + gap;
+  function next() {
+    pos += step;
+    track.style.transition = 'transform ' + TRANS_MS + 'ms cubic-bezier(0.4, 0, 0.2, 1)';
+    track.style.transform = 'translateX(-' + pos + 'px)';
+
+    // 마지막 clone 구간 도달 시 전환 완료 후 원위치로 순간 이동
+    if (pos >= loopEnd) {
+      setTimeout(function () {
+        track.style.transition = 'none';
+        pos = loopStart;
+        track.style.transform = 'translateX(-' + pos + 'px)';
+      }, TRANS_MS);
+    }
   }
 
-  function goTo(idx) {
-    const vis = getVisible();
-    const max = total - vis;
-    if (idx > max) idx = 0;
-    if (idx < 0) idx = max;
-    current = idx;
-    track.style.transform = 'translateX(-' + (current * getStep()) + 'px)';
-  }
-
-  function startAuto() {
+  function start() {
     clearInterval(timer);
-    timer = setInterval(function () { goTo(current + 1); }, 5000);
+    timer = setInterval(next, INTERVAL);
   }
 
-  startAuto();
+  init();
+  start();
 
   window.addEventListener('resize', function () {
-    track.style.transition = 'none';
-    goTo(0);
-    requestAnimationFrame(function () {
-      track.style.transition = '';
-      startAuto();
-    });
+    clearInterval(timer);
+    init();
+    start();
   });
 }());
