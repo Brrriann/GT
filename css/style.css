@@ -226,10 +226,18 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');
   background-size: cover;
   background-position: center 30%;
   z-index: 0;
+  opacity: 1;
+  transition: opacity 0.9s ease;
+}
+#heroBg {
+  background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');
+}
+#heroBg2 {
+  background-image: url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1600&q=80');
+  opacity: 0;
 }
 
 .hero-inner {
@@ -331,10 +339,10 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 
 /* ===== 프로필 카드: 가로형 직사각형, 사진 위에 텍스트 오버레이 ===== */
 .profile-card {
-  width: 100%;
-  background: rgba(255,255,255,0.10);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  width: 70%;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   border-radius: 0;
   display: none;
   overflow: hidden;

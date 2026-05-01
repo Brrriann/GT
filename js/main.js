@@ -71,6 +71,9 @@ const heroSub   = document.querySelector('.hero-sub');
 const heroOverlayTrust  = document.getElementById('heroOverlayTrust');
 const heroOverlayExpert = document.getElementById('heroOverlayExpert');
 const heroOverlays = [heroOverlayTrust, heroOverlayExpert];
+const heroBg1 = document.getElementById('heroBg');
+const heroBg2 = document.getElementById('heroBg2');
+const heroBgs = [heroBg1, heroBg2];
 let current = 0;
 let profileTimer;
 let isTransitioning = false;
@@ -89,9 +92,12 @@ function showProfile(idx) {
   if (heroTitle) heroTitle.style.opacity = '0';
   if (heroSub)   heroSub.style.opacity   = '0';
 
-  // switch background overlay
+  // switch background overlay + background image
   heroOverlays.forEach((ov, i) => {
     if (ov) ov.classList.toggle('active', i === current);
+  });
+  heroBgs.forEach((bg, i) => {
+    if (bg) bg.style.opacity = i === current ? '1' : '0';
   });
 
   setTimeout(() => {
