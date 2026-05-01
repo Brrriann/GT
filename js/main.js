@@ -291,16 +291,25 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
   // 결과: [6c, 1, 2, 3, 4, 5, 6, 1c, 2c, 3c, 4c, 5c, 6c]
 
-  var GAP = 24;
-  var PARTIAL = 50;    // 왼쪽에 보일 이전 카드 너비(px)
   var TRANS_MS = 700;  // 슬라이드 전환 시간(ms)
   var INTERVAL = 5000; // 자동 전환 간격(ms)
 
   var pos, loopStart, loopEnd, step, timer;
 
+  function getGap() {
+    return parseFloat(window.getComputedStyle(track).gap) || 24;
+  }
+
+  function getPartial() {
+    return window.innerWidth <= 768 ? 25 : 40;
+  }
+
   function init() {
-    step = origItems[0].offsetWidth + GAP;
-    loopStart = origItems[0].offsetWidth - PARTIAL; // = itemW - 50
+    var gap = getGap();
+    var iw = origItems[0].offsetWidth;
+    step = iw + gap;
+    var partial = getPartial();
+    loopStart = iw - partial;
     loopEnd = loopStart + total * step;
     pos = loopStart;
     track.style.transition = 'none';
