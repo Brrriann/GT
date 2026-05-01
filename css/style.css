@@ -833,6 +833,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
     margin-left: 0;
     border: 1px solid var(--color-border);
     margin-top: -1px;
+    padding: 24px 14px 20px;
   }
   .process-step:first-child { margin-top: 0; }
   .process-arrow { display: none; }
@@ -858,6 +859,10 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   letter-spacing: -0.02em;
   line-height: 1.25;
   margin-bottom: 60px;
+}
+.reasons-highlight {
+  color: var(--color-cta);
+  font-weight: 900;
 }
 
 .reasons-grid {
@@ -1005,7 +1010,6 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   font-size: 15px;
   color: rgba(255,255,255,0.88);
   line-height: 1.75;
-  margin-bottom: 24px;
 }
 
 .service-cta {
@@ -1546,7 +1550,7 @@ button:focus-visible {
 /* ===== [10] 공공기관 로고 슬라이드 ===== */
 #partners {
   background: #fff;
-  padding: 72px 0 64px;
+  padding: 40px 0 64px;
   overflow: hidden;
   border-top: 1px solid var(--color-border);
 }
