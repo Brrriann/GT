@@ -218,7 +218,6 @@ const countObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.querySelectorAll('.count-up').forEach(startCountUp);
-      countObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.3 });
