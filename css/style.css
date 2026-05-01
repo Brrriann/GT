@@ -1029,9 +1029,26 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 
 @media (max-width: 768px) {
-  .services-grid { grid-template-columns: 1fr; }
-  .service-card { min-height: 280px; }
-  .service-content { min-height: 280px; }
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .service-card { min-height: 150px; }
+  .service-content {
+    min-height: 150px;
+    padding: 16px 12px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .service-name {
+    font-size: 16px;
+    margin-bottom: 0;
+    line-height: 1.3;
+  }
+  /* 모바일: 태그·설명 숨김 */
+  .service-tags { display: none; }
+  .service-desc { display: none; }
 }
 
 /* ===== 히어로 뱃지 바 ===== */
