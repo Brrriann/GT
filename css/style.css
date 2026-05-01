@@ -1462,7 +1462,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   color: rgba(255,255,255,0.35);
 }
 .contact-info-val {
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--color-white);
 }
@@ -1525,6 +1525,16 @@ a.contact-info-val:hover { color: #60A5FA; }
   display: flex;
   gap: 8px;
 }
+
+.service-toggle-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.service-toggle-scroll::-webkit-scrollbar { display: none; }
 .service-toggle {
   padding: 8px 18px;
   border: 1px solid var(--color-border);
