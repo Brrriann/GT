@@ -968,14 +968,14 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(15,23,42,0.25) 0%,
-    rgba(15,23,42,0.72) 55%,
-    rgba(15,23,42,0.90) 100%
+    rgba(10,30,90,0.20) 0%,
+    rgba(8,24,72,0.68) 55%,
+    rgba(5,15,55,0.90) 100%
   );
   transition: background 0.35s ease;
 }
 .service-card:hover .service-overlay {
-  background: rgba(3,105,161,0.88);
+  background: rgba(3,60,140,0.88);
 }
 
 .service-content {
@@ -997,6 +997,15 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   color: var(--color-white);
   margin-bottom: 12px;
   letter-spacing: -0.02em;
+}
+
+.service-agency {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(147,197,253,0.85);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .service-tags {
@@ -1037,14 +1046,19 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   .service-content {
     min-height: 150px;
     padding: 16px 12px;
-    justify-content: flex-end;
-    align-items: flex-start;
-    text-align: left;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   .service-name {
     font-size: 16px;
-    margin-bottom: 0;
+    margin-bottom: 4px;
     line-height: 1.3;
+  }
+  .service-agency {
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    margin-bottom: 0;
   }
   /* 모바일: 태그·설명 숨김 */
   .service-tags { display: none; }
