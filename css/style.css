@@ -423,6 +423,13 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   }
 
   .nav-menu { display: none; }
+  #navbar.scrolled .nav-inner { position: relative; }
+  #navbar.scrolled .nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #navbar.scrolled .nav-logo img { height: 32px; }
   .hero-title { font-size: 52px; }
   .hero-inner { padding: 60px 20px 48px; }
   .profile-img-wrap { width: 90px; height: 110px; }
