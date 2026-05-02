@@ -1248,40 +1248,41 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   margin: 0 auto;
 }
 
-/* 슬라이더 래퍼: 화살표 + 뷰포트 */
+/* 슬라이더 래퍼 */
 .cert-slider-wrap {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin: 48px auto 0;
-  max-width: 900px;
-  padding: 0 24px;
+  position: relative;
+  margin-top: 48px;
 }
 
 .cert-slider-outer {
-  flex: 1;
   overflow: hidden;
+  margin: 0 15vw;
+  padding-bottom: 16px;
 }
 
 .cert-track {
   display: flex;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 24px;
   will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cert-item {
-  flex: 0 0 100%;
+  /* PC: 3장 + 양쪽 40px 모서리 노출 */
+  flex: 0 0 calc((70vw - 176px) / 3);
   background: var(--color-white);
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
 }
 
 /* 화살표 버튼 */
 .cert-arrow {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 2px solid rgba(0,0,0,0.15);
   background: var(--color-white);
@@ -1289,24 +1290,26 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   transition: background 0.2s, border-color 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-.cert-arrow svg { width: 20px; height: 20px; stroke: var(--color-dark); }
+.cert-arrow-prev { left: 10vw; }
+.cert-arrow-next { right: 10vw; }
+.cert-arrow svg { width: 18px; height: 18px; stroke: var(--color-dark); }
 .cert-arrow:hover { background: var(--color-cta); border-color: var(--color-cta); }
 .cert-arrow:hover svg { stroke: #fff; }
-.cert-arrow:disabled { opacity: 0.3; pointer-events: none; }
 
 /* 인디케이터 바 */
 .cert-nav {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 24px;
+  margin-top: 20px;
 }
 .cert-nav-bar {
   height: 4px;
-  width: 36px;
+  width: 32px;
   border-radius: 2px;
   background: rgba(0,0,0,0.15);
   cursor: pointer;
@@ -1314,7 +1317,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 .cert-nav-bar.active {
   background: var(--color-cta);
-  width: 56px;
+  width: 52px;
 }
 .cert-item img {
   width: 100%;
@@ -1380,8 +1383,15 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 
 @media (max-width: 768px) {
-  .cert-slider-wrap { padding: 0 12px; gap: 10px; }
-  .cert-arrow { width: 36px; height: 36px; }
+  .cert-slider-outer { margin: 0 8vw; }
+  .cert-track { gap: 12px; }
+  .cert-item {
+    /* 모바일: 2장 + 양쪽 25px 모서리 노출 */
+    flex: 0 0 calc((84vw - 86px) / 2);
+  }
+  .cert-arrow { width: 34px; height: 34px; }
+  .cert-arrow-prev { left: 1vw; }
+  .cert-arrow-next { right: 1vw; }
   .cert-arrow svg { width: 16px; height: 16px; }
 }
 

@@ -269,7 +269,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-/* ===== 자격증 슬라이더 (수동 + 자동 5초 + 스와이프 + 인디케이터) ===== */
+/* ===== 자격증 슬라이더 (멀티카드 + 수동 + 자동 5초 + 스와이프 + 인디케이터) ===== */
 (function () {
   var track   = document.getElementById('certTrack');
   var navWrap = document.getElementById('certNav');
@@ -277,9 +277,9 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   var btnNext = document.getElementById('certNext');
   if (!track) return;
 
-  var items   = Array.from(track.querySelectorAll('.cert-item'));
-  var total   = items.length;
-  var current = 0;
+  var items    = Array.from(track.querySelectorAll('.cert-item'));
+  var total    = items.length;
+  var current  = 0;
   var timer;
   var INTERVAL = 5000;
 
@@ -291,6 +291,16 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     navWrap.appendChild(bar);
   });
 
+  function getStep() {
+    var gap = parseFloat(window.getComputedStyle(track).gap) || 24;
+    return items[0].offsetWidth + gap;
+  }
+
+  function getMaxIndex() {
+    var visible = window.innerWidth <= 768 ? 2 : 3;
+    return total - visible;
+  }
+
   function updateNav() {
     document.querySelectorAll('.cert-nav-bar').forEach(function (b, i) {
       b.classList.toggle('active', i === current);
@@ -298,13 +308,14 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   }
 
   function goTo(idx) {
-    current = (idx + total) % total;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    var max = getMaxIndex();
+    current = Math.max(0, Math.min(idx, max));
+    track.style.transform = 'translateX(-' + (current * getStep()) + 'px)';
     updateNav();
   }
 
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
+  function next() { goTo(current + 1 > getMaxIndex() ? 0 : current + 1); }
+  function prev() { goTo(current - 1 < 0 ? getMaxIndex() : current - 1); }
 
   function resetTimer() {
     clearInterval(timer);
