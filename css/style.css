@@ -2050,6 +2050,7 @@ button:focus-visible {
 @media (max-width: 768px) {
   .fi-sep { display: none; }
   .fi-break { display: block; }
+  .fi-row span:not(.fi-sep):not(.fi-break) { margin-right: 12px; }
   .footer-bottom {
     padding-bottom: calc(72px + env(safe-area-inset-bottom));
   }
