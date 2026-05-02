@@ -269,86 +269,132 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-/* ===== 자격증 슬라이더 (멀티카드 + 수동 + 자동 5초 + 스와이프 + 인디케이터) ===== */
+/* ===== 자격증 슬라이더 (무한루프 + 양쪽 peek + 5초 자동재생) ===== */
 (function () {
   var track   = document.getElementById('certTrack');
   var navWrap = document.getElementById('certNav');
-  var btnPrev = document.getElementById('certPrev');
-  var btnNext = document.getElementById('certNext');
   if (!track) return;
 
-  var items    = Array.from(track.querySelectorAll('.cert-item'));
-  var total    = items.length;
-  var current  = 0;
+  /* 원본 아이템 (클론 추가 전) */
+  var realItems = Array.from(track.children);
+  var total     = realItems.length;
+  var INTERVAL  = 5000;
+  var TRANS     = 500;
+  var current   = 0;
+  var busy      = false;
   var timer;
-  var INTERVAL = 5000;
+
+  /* 앞뒤에 클론 추가 — total장씩 붙여서 어떤 방향으로도 빈칸 없음 */
+  for (var i = total - 1; i >= 0; i--) {
+    var c = realItems[i].cloneNode(true);
+    c.classList.add('cert-clone');
+    c.setAttribute('aria-hidden', 'true');
+    track.insertBefore(c, track.firstChild);
+  }
+  for (var j = 0; j < total; j++) {
+    var d = realItems[j].cloneNode(true);
+    d.classList.add('cert-clone');
+    d.setAttribute('aria-hidden', 'true');
+    track.appendChild(d);
+  }
+
+  var OFFSET = total; /* 앞에 붙인 클론 수 */
 
   /* 인디케이터 바 생성 */
-  items.forEach(function (_, i) {
+  realItems.forEach(function (_, i) {
     var bar = document.createElement('div');
     bar.className = 'cert-nav-bar' + (i === 0 ? ' active' : '');
-    bar.addEventListener('click', function () { goTo(i); resetTimer(); });
+    bar.addEventListener('click', function () { jumpTo(i); resetTimer(); });
     navWrap.appendChild(bar);
   });
 
   function getStep() {
-    var gap = parseFloat(window.getComputedStyle(track).gap) || 24;
-    return items[0].offsetWidth + gap;
-  }
-
-  function getMaxIndex() {
-    var visible = window.innerWidth <= 768 ? 2 : 3;
-    return total - visible;
+    var first = track.querySelector('.cert-item');
+    var gap   = parseFloat(window.getComputedStyle(track).gap) || 24;
+    return first.offsetWidth + gap;
   }
 
   function updateNav() {
-    document.querySelectorAll('.cert-nav-bar').forEach(function (b, i) {
+    navWrap.querySelectorAll('.cert-nav-bar').forEach(function (b, i) {
       b.classList.toggle('active', i === current);
     });
   }
 
-  function goTo(idx) {
-    var max = getMaxIndex();
-    current = Math.max(0, Math.min(idx, max));
-    track.style.transform = 'translateX(-' + (current * getStep()) + 'px)';
+  /* 트랜지션 없이 즉시 이동 (클론→실제 점프용) */
+  function setPos(displayIdx) {
+    track.style.transition = 'none';
+    track.style.transform  = 'translateX(-' + (displayIdx * getStep()) + 'px)';
+    track.getBoundingClientRect(); /* force reflow */
+    track.style.transition = '';
+  }
+
+  /* 애니메이션 슬라이드 → 완료 후 실제 위치로 점프 */
+  function slide(delta) {
+    if (busy) return;
+    busy = true;
+    var targetDisplay = current + OFFSET + delta;
+    track.style.transform = 'translateX(-' + (targetDisplay * getStep()) + 'px)';
+    setTimeout(function () {
+      current = ((current + delta) % total + total) % total;
+      setPos(current + OFFSET);
+      updateNav();
+      busy = false;
+    }, TRANS);
+  }
+
+  function next() { slide(1); }
+  function prev() { slide(-1); }
+
+  /* 인디케이터 클릭용 즉시 이동 */
+  function jumpTo(realIdx) {
+    current = ((realIdx % total) + total) % total;
+    setPos(current + OFFSET);
     updateNav();
   }
 
-  function next() { goTo(current + 1 > getMaxIndex() ? 0 : current + 1); }
-  function prev() { goTo(current - 1 < 0 ? getMaxIndex() : current - 1); }
+  /* 초기 위치 */
+  setPos(OFFSET);
+  updateNav();
 
+  /* 자동재생 */
   function resetTimer() {
     clearInterval(timer);
     timer = setInterval(next, INTERVAL);
   }
+  resetTimer();
 
-
-  /* 터치 스와이프 */
-  var touchStartX = 0;
+  /* 슬라이더 터치 스와이프 */
+  var startX = 0;
   track.addEventListener('touchstart', function (e) {
-    touchStartX = e.touches[0].clientX;
+    startX = e.touches[0].clientX;
   }, { passive: true });
   track.addEventListener('touchend', function (e) {
-    var diff = touchStartX - e.changedTouches[0].clientX;
+    var diff = startX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); resetTimer(); }
   }, { passive: true });
 
-  goTo(1);
-  resetTimer();
-
-  window.addEventListener('resize', function () { goTo(current); });
+  window.addEventListener('resize', function () { setPos(current + OFFSET); });
 }());
 
-/* ===== 자격증 라이트박스 ===== */
+/* ===== 자격증 라이트박스 (스와이프·키보드 넘기기 포함) ===== */
 (function () {
-  const lightbox = document.getElementById('certLightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const overlay = lightbox.querySelector('.lightbox-overlay');
-  const closeBtn = lightbox.querySelector('.lightbox-close');
+  var lightbox    = document.getElementById('certLightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var overlay     = lightbox.querySelector('.lightbox-overlay');
+  var closeBtn    = lightbox.querySelector('.lightbox-close');
 
-  function openLightbox(src, alt) {
-    lightboxImg.src = src;
-    lightboxImg.alt = alt;
+  /* 실제 이미지 목록 (클론 제외) */
+  var images  = Array.from(document.querySelectorAll('.cert-item:not(.cert-clone) img'));
+  var current = 0;
+
+  function showImage(idx) {
+    current = ((idx % images.length) + images.length) % images.length;
+    lightboxImg.src = images[current].src;
+    lightboxImg.alt = images[current].alt;
+  }
+
+  function openLightbox(idx) {
+    showImage(idx);
     lightbox.setAttribute('aria-hidden', 'false');
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -358,16 +404,35 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    setTimeout(() => { lightboxImg.src = ''; }, 250);
+    setTimeout(function () { lightboxImg.src = ''; }, 250);
   }
 
-  document.querySelectorAll('.cert-item img').forEach(img => {
-    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  /* 클론 포함 모든 자격증 이미지 클릭 → 실제 인덱스로 열기 */
+  document.querySelectorAll('.cert-item img').forEach(function (img) {
+    img.addEventListener('click', function () {
+      var idx = images.findIndex(function (ri) { return ri.src === img.src; });
+      openLightbox(idx !== -1 ? idx : 0);
+    });
   });
 
   overlay.addEventListener('click', closeLightbox);
   closeBtn.addEventListener('click', closeLightbox);
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeLightbox();
+
+  /* 키보드: Esc 닫기, ←→ 넘기기 */
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowRight') showImage(current + 1);
+    if (e.key === 'ArrowLeft')  showImage(current - 1);
   });
+
+  /* 라이트박스 내 스와이프 넘기기 */
+  var startX = 0;
+  lightbox.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', function (e) {
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) showImage(diff > 0 ? current + 1 : current - 1);
+  }, { passive: true });
 }());
