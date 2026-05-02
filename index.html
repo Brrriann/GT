@@ -540,16 +540,25 @@
           </p>
         </div>
       </div>
-      <div class="cert-slider-outer">
-        <div class="cert-track" id="certTrack">
-          <div class="cert-item"><img src="assets/cert-1.jpg" alt="자격증 1" /></div>
-          <div class="cert-item"><img src="assets/cert-2.jpg" alt="자격증 2" /></div>
-          <div class="cert-item"><img src="assets/cert-3.jpg" alt="자격증 3" /></div>
-          <div class="cert-item"><img src="assets/cert-5.jpg" alt="자격증 4" /></div>
-          <div class="cert-item"><img src="assets/cert-6.jpg" alt="자격증 5" /></div>
-          <div class="cert-item"><img src="assets/cert-7.jpg" alt="자격증 6" /></div>
+      <div class="cert-slider-wrap">
+        <button class="cert-arrow cert-arrow-prev" id="certPrev" aria-label="이전">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="cert-slider-outer">
+          <div class="cert-track" id="certTrack">
+            <div class="cert-item"><img src="assets/cert-1.jpg" alt="자격증 1" /></div>
+            <div class="cert-item"><img src="assets/cert-2.jpg" alt="자격증 2" /></div>
+            <div class="cert-item"><img src="assets/cert-3.jpg" alt="자격증 3" /></div>
+            <div class="cert-item"><img src="assets/cert-5.jpg" alt="자격증 4" /></div>
+            <div class="cert-item"><img src="assets/cert-6.jpg" alt="자격증 5" /></div>
+            <div class="cert-item"><img src="assets/cert-7.jpg" alt="자격증 6" /></div>
+          </div>
         </div>
+        <button class="cert-arrow cert-arrow-next" id="certNext" aria-label="다음">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
+      <div class="cert-nav" id="certNav"></div>
     </section>
 
     <!-- ========== [8] 보험계약증서 ========== -->

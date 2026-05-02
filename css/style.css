@@ -1248,25 +1248,73 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   margin: 0 auto;
 }
 
+/* 슬라이더 래퍼: 화살표 + 뷰포트 */
+.cert-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 48px auto 0;
+  max-width: 900px;
+  padding: 0 24px;
+}
+
 .cert-slider-outer {
+  flex: 1;
   overflow: hidden;
-  margin: 48px 15vw 0;
-  padding-bottom: 16px;
 }
 
 .cert-track {
   display: flex;
-  gap: 24px;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
 .cert-item {
-  /* PC: 70vw 슬라이더 내 3장 + 양쪽 40px 모서리 노출 */
-  flex: 0 0 calc((70vw - 176px) / 3);
+  flex: 0 0 100%;
   background: var(--color-white);
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+/* 화살표 버튼 */
+.cert-arrow {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,0,0,0.15);
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.cert-arrow svg { width: 20px; height: 20px; stroke: var(--color-dark); }
+.cert-arrow:hover { background: var(--color-cta); border-color: var(--color-cta); }
+.cert-arrow:hover svg { stroke: #fff; }
+.cert-arrow:disabled { opacity: 0.3; pointer-events: none; }
+
+/* 인디케이터 바 */
+.cert-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+.cert-nav-bar {
+  height: 4px;
+  width: 36px;
+  border-radius: 2px;
+  background: rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: background 0.3s, width 0.3s;
+}
+.cert-nav-bar.active {
+  background: var(--color-cta);
+  width: 56px;
 }
 .cert-item img {
   width: 100%;
@@ -1332,18 +1380,9 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 
 @media (max-width: 768px) {
-  .cert-slider-outer {
-    /* 모바일: 여백 8vw로 줄여 카드 30% 확대 (15vw→8vw) */
-    margin-left: 8vw;
-    margin-right: 8vw;
-  }
-  .cert-track {
-    gap: 12px;
-  }
-  .cert-item {
-    /* 모바일: 84vw 슬라이더 내 2장 + 양쪽 25px 모서리 노출 */
-    flex: 0 0 calc((84vw - 86px) / 2);
-  }
+  .cert-slider-wrap { padding: 0 12px; gap: 10px; }
+  .cert-arrow { width: 36px; height: 36px; }
+  .cert-arrow svg { width: 16px; height: 16px; }
 }
 
 /* ===== [8] 보험계약증서 ===== */

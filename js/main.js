@@ -269,75 +269,65 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-/* ===== 자격증 슬라이더 (5초마다 1장 왼쪽 무한 반복) ===== */
+/* ===== 자격증 슬라이더 (수동 + 자동 5초 + 스와이프 + 인디케이터) ===== */
 (function () {
-  var track = document.getElementById('certTrack');
+  var track   = document.getElementById('certTrack');
+  var navWrap = document.getElementById('certNav');
+  var btnPrev = document.getElementById('certPrev');
+  var btnNext = document.getElementById('certNext');
   if (!track) return;
 
-  var origItems = Array.from(track.querySelectorAll('.cert-item'));
-  var total = origItems.length; // 6
+  var items   = Array.from(track.querySelectorAll('.cert-item'));
+  var total   = items.length;
+  var current = 0;
+  var timer;
+  var INTERVAL = 5000;
 
-  // 왼쪽 여백용: 마지막 카드 clone을 맨 앞에 삽입
-  track.prepend(origItems[total - 1].cloneNode(true));
-  // 무한루프용: 전체 clone을 뒤에 추가
-  origItems.forEach(function (item) {
-    track.appendChild(item.cloneNode(true));
+  /* 인디케이터 바 생성 */
+  items.forEach(function (_, i) {
+    var bar = document.createElement('div');
+    bar.className = 'cert-nav-bar' + (i === 0 ? ' active' : '');
+    bar.addEventListener('click', function () { goTo(i); resetTimer(); });
+    navWrap.appendChild(bar);
   });
-  // 결과: [6c, 1, 2, 3, 4, 5, 6, 1c, 2c, 3c, 4c, 5c, 6c]
 
-  var TRANS_MS = 700;  // 슬라이드 전환 시간(ms)
-  var INTERVAL = 5000; // 자동 전환 간격(ms)
-
-  var pos, loopStart, loopEnd, step, timer;
-
-  function getGap() {
-    return parseFloat(window.getComputedStyle(track).gap) || 24;
+  function updateNav() {
+    document.querySelectorAll('.cert-nav-bar').forEach(function (b, i) {
+      b.classList.toggle('active', i === current);
+    });
   }
 
-  function getPartial() {
-    return window.innerWidth <= 768 ? 25 : 40;
+  function goTo(idx) {
+    current = (idx + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    updateNav();
   }
 
-  function init() {
-    var gap = getGap();
-    var iw = origItems[0].offsetWidth;
-    step = iw + gap;
-    var partial = getPartial();
-    loopStart = iw - partial;
-    loopEnd = loopStart + total * step;
-    pos = loopStart;
-    track.style.transition = 'none';
-    track.style.transform = 'translateX(-' + pos + 'px)';
-  }
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
 
-  function next() {
-    pos += step;
-    track.style.transition = 'transform ' + TRANS_MS + 'ms cubic-bezier(0.4, 0, 0.2, 1)';
-    track.style.transform = 'translateX(-' + pos + 'px)';
-
-    // 마지막 clone 구간 도달 시 전환 완료 후 원위치로 순간 이동
-    if (pos >= loopEnd) {
-      setTimeout(function () {
-        track.style.transition = 'none';
-        pos = loopStart;
-        track.style.transform = 'translateX(-' + pos + 'px)';
-      }, TRANS_MS);
-    }
-  }
-
-  function start() {
+  function resetTimer() {
     clearInterval(timer);
     timer = setInterval(next, INTERVAL);
   }
 
-  init();
-  start();
+  btnNext.addEventListener('click', function () { next(); resetTimer(); });
+  btnPrev.addEventListener('click', function () { prev(); resetTimer(); });
 
-  window.addEventListener('resize', function () {
-    clearInterval(timer);
-    init();
-    start();
-  });
+  /* 터치 스와이프 */
+  var touchStartX = 0;
+  track.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  track.addEventListener('touchend', function (e) {
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); resetTimer(); }
+  }, { passive: true });
+
+  goTo(0);
+  resetTimer();
+
+  window.addEventListener('resize', function () { goTo(current); });
 }());
 
 /* ===== 자격증 라이트박스 ===== */
