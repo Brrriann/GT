@@ -322,8 +322,6 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     timer = setInterval(next, INTERVAL);
   }
 
-  btnNext.addEventListener('click', function () { next(); resetTimer(); });
-  btnPrev.addEventListener('click', function () { prev(); resetTimer(); });
 
   /* 터치 스와이프 */
   var touchStartX = 0;
