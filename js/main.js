@@ -1,3 +1,4 @@
+console.log('[GT] main.js v2 로드됨');
 /* ===== 네비게이션: 스크롤 시 투명→흰색 ===== */
 const navbar = document.getElementById('navbar');
 const topBar = document.getElementById('top-logo-bar');
