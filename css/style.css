@@ -2041,10 +2041,10 @@ button:focus-visible {
   color: #475569;
 }
 
-/* 모바일: 각 항목 한 줄씩 */
+/* 모바일: 지정 항목만 줄바꿈, | 숨김 */
 @media (max-width: 768px) {
   .fi-sep { display: none; }
-  .fi-row span { display: block; }
+  .fi-break { display: block; }
   .footer-bottom {
     padding-bottom: calc(72px + env(safe-area-inset-bottom));
   }
