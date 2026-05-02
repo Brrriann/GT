@@ -164,6 +164,18 @@ if (serviceSelect) {
   const submitBtn   = form ? form.querySelector('.form-submit') : null;
   if (!form) { console.error('[GT폼] contactForm을 찾을 수 없음'); return; }
 
+  /* native fallback 제출 후 돌아왔을 때 성공 메시지 표시 */
+  if (new URLSearchParams(location.search).get('submitted') === '1') {
+    msgEl.textContent = '상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.';
+    msgEl.className   = 'form-msg form-msg--success';
+    msgEl.hidden      = false;
+    history.replaceState(null, '', location.pathname);
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+
   function showMsg(text, type) {
     msgEl.textContent = text;
     msgEl.className   = 'form-msg form-msg--' + type;
