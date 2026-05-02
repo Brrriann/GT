@@ -1983,10 +1983,21 @@ button:focus-visible {
   opacity: 0.85;
 }
 
+.footer-info {
+  flex: 1;
+}
+
 .footer-info p {
   font-size: 14px;
   line-height: 2.1;
   color: #94A3B8;
+}
+
+.footer-rights {
+  margin-top: 4px;
+  font-size: 13px !important;
+  color: #64748B !important;
+  line-height: 1.8 !important;
 }
 
 .footer-social {
