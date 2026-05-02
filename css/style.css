@@ -1252,10 +1252,11 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 .cert-slider-wrap {
   position: relative;
   margin-top: 48px;
+  overflow: hidden;
 }
 
 .cert-slider-outer {
-  overflow: hidden;
+  overflow: visible;
   margin: 0 15vw;
   padding-bottom: 16px;
 }

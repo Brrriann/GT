@@ -333,7 +333,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); resetTimer(); }
   }, { passive: true });
 
-  goTo(0);
+  goTo(1);
   resetTimer();
 
   window.addEventListener('resize', function () { goTo(current); });
