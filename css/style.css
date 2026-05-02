@@ -1993,6 +1993,11 @@ button:focus-visible {
   color: #94A3B8;
 }
 
+.footer-info b {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .footer-rights {
   margin-top: 4px;
   font-size: 13px !important;
