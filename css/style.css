@@ -1828,6 +1828,26 @@ a.contact-info-val:hover { color: #60A5FA; }
   margin-top: 4px;
 }
 .form-submit:hover { background: var(--color-cta); }
+.form-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.form-msg {
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 1.5;
+}
+.form-msg--success {
+  background: #edfaf3;
+  color: #1a7a4a;
+  border: 1px solid #a3e6c3;
+}
+.form-msg--error {
+  background: #fff3f3;
+  color: #c0392b;
+  border: 1px solid #f5b5b5;
+}
 
 @media (max-width: 768px) {
   .contact-inner { grid-template-columns: 1fr; }

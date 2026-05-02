@@ -155,6 +155,84 @@ if (serviceSelect) {
   });
 }
 
+/* ===== 상담문의: web3forms 제출 ===== */
+(function () {
+  console.log('[GT폼] IIFE 실행됨. form:', document.getElementById('contactForm'), 'msgEl:', document.getElementById('formMsg'));
+  const form        = document.getElementById('contactForm');
+  const msgEl       = document.getElementById('formMsg');
+  const submitBtn   = form ? form.querySelector('.form-submit') : null;
+  if (!form) { console.error('[GT폼] contactForm을 찾을 수 없음'); return; }
+
+  function showMsg(text, type) {
+    msgEl.textContent = text;
+    msgEl.className   = 'form-msg form-msg--' + type;
+    msgEl.hidden      = false;
+  }
+
+  function validate() {
+    const name    = form.querySelector('#contactName').value.trim();
+    const phone   = form.querySelector('#contactPhone').value.trim();
+    const message = form.querySelector('#contactMessage').value.trim();
+    const privacy = form.querySelector('#privacyCheck').checked;
+
+    if (!name)    { showMsg('이름을 입력해 주세요.', 'error'); return false; }
+    if (!phone)   { showMsg('연락처를 입력해 주세요.', 'error'); return false; }
+    if (!message) { showMsg('문의 내용을 입력해 주세요.', 'error'); return false; }
+    if (!privacy) { showMsg('개인정보 수집 및 이용에 동의해 주세요.', 'error'); return false; }
+    return true;
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    msgEl.hidden = true;
+
+    if (!validate()) return;
+
+    const services = form.querySelector('#selectedServices').value;
+    const name     = form.querySelector('#contactName').value.trim();
+    const phone    = form.querySelector('#contactPhone').value.trim();
+    const message  = form.querySelector('#contactMessage').value.trim();
+
+    submitBtn.disabled    = true;
+    submitBtn.textContent = '전송 중...';
+
+    try {
+      console.log('[GT폼] fetch 시작');
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: '23ff213b-11ce-4c4b-8fde-2d4fd6abfe99',
+          subject:    'GT탐정사무소 상담 문의 - ' + (services || '기타'),
+          from_name:  name,
+          '문의유형':   services || '(미선택)',
+          '이름':       name,
+          '연락처':     phone,
+          '문의내용':   message,
+          botcheck:   '',
+        }),
+      });
+
+      const data = await res.json();
+      console.log('[GT폼] 응답:', data);
+
+      if (data.success) {
+        showMsg('상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.', 'success');
+        form.reset();
+        if (serviceSelect) serviceSelect.classList.remove('has-value');
+      } else {
+        showMsg('전송 실패: ' + (data.message || '잠시 후 다시 시도해 주세요.'), 'error');
+      }
+    } catch (err) {
+      console.error('[GT폼] 오류:', err);
+      showMsg('네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+    } finally {
+      submitBtn.disabled    = false;
+      submitBtn.textContent = '상담 신청하기';
+    }
+  });
+}());
+
 /* ===== 상담문의: 전화번호 자동 하이픈 ===== */
 const phoneInput = document.getElementById('contactPhone');
 if (phoneInput) {
