@@ -339,3 +339,36 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     start();
   });
 }());
+
+/* ===== 자격증 라이트박스 ===== */
+(function () {
+  const lightbox = document.getElementById('certLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const overlay = lightbox.querySelector('.lightbox-overlay');
+  const closeBtn = lightbox.querySelector('.lightbox-close');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.setAttribute('aria-hidden', 'false');
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { lightboxImg.src = ''; }, 250);
+  }
+
+  document.querySelectorAll('.cert-item img').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+
+  overlay.addEventListener('click', closeLightbox);
+  closeBtn.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+}());
