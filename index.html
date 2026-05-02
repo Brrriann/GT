@@ -666,7 +666,11 @@
         </div>
         <!-- 오른쪽: 폼 -->
         <div class="contact-right">
-          <form class="contact-form" id="contactForm" novalidate>
+          <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="23ff213b-11ce-4c4b-8fde-2d4fd6abfe99" />
+            <input type="hidden" name="subject" value="GT탐정사무소 상담 문의" />
+            <input type="hidden" name="from_name" value="GT탐정사무소 홈페이지" />
+            <input type="hidden" name="redirect" value="https://gt-e9h.pages.dev/?submitted=1" />
 
             <!-- 서비스 선택 드롭다운 -->
             <div class="form-group">
@@ -946,6 +950,6 @@
     </div>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20260502c"></script>
 </body>
 </html>
