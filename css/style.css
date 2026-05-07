@@ -1564,12 +1564,14 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-  line-height: 0;
+  aspect-ratio: 16 / 9;
 }
 .partnership-img-item img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center top;
 }
 
 @media (max-width: 768px) {
