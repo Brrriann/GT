@@ -1,11 +1,26 @@
 User-agent: *
 Allow: /
+Disallow: /assets/cert-
+Disallow: /assets/business-license.png
+Disallow: /assets/insurance-cert.png
+Disallow: /assets/insurance.jpg
 
 User-agent: Yeti
 Allow: /
 
 User-agent: Googlebot
 Allow: /
+Disallow: /assets/cert-
+Disallow: /assets/business-license.png
+Disallow: /assets/insurance-cert.png
+Disallow: /assets/insurance.jpg
+
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /assets/cert-
+Disallow: /assets/business-license.png
+Disallow: /assets/insurance-cert.png
+Disallow: /assets/insurance.jpg
 
 User-agent: Bingbot
 Allow: /
