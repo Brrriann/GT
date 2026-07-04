@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /assets/gt-doc-
+Disallow: /assets/gt-reg.png
+Disallow: /assets/gt-ins.png
+Disallow: /assets/gt-ins2.jpg
 Disallow: /assets/cert-
 Disallow: /assets/business-license.png
 Disallow: /assets/insurance-cert.png
@@ -10,6 +14,10 @@ Allow: /
 
 User-agent: Googlebot
 Allow: /
+Disallow: /assets/gt-doc-
+Disallow: /assets/gt-reg.png
+Disallow: /assets/gt-ins.png
+Disallow: /assets/gt-ins2.jpg
 Disallow: /assets/cert-
 Disallow: /assets/business-license.png
 Disallow: /assets/insurance-cert.png
@@ -17,6 +25,10 @@ Disallow: /assets/insurance.jpg
 
 User-agent: Googlebot-Image
 Allow: /
+Disallow: /assets/gt-doc-
+Disallow: /assets/gt-reg.png
+Disallow: /assets/gt-ins.png
+Disallow: /assets/gt-ins2.jpg
 Disallow: /assets/cert-
 Disallow: /assets/business-license.png
 Disallow: /assets/insurance-cert.png
