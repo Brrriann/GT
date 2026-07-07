@@ -1556,11 +1556,13 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   color: var(--color-muted);
 }
 .partnership-images {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
 }
 .partnership-img-item {
+  width: calc((100% - 48px) / 3);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.1);
@@ -1576,8 +1578,10 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   .partnership-inner { gap: 36px; }
   .partnership-copy { text-align: left; }
   .partnership-images {
-    grid-template-columns: 1fr;
     gap: 16px;
+  }
+  .partnership-img-item {
+    width: 100%;
   }
 }
 
