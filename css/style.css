@@ -2038,7 +2038,7 @@ button:focus-visible {
 }
 
 .footer-promo {
-  width: 200px;
+  width: 140px;
   height: auto;
   border-radius: 12px;
   opacity: 0.95;
@@ -2108,7 +2108,7 @@ button:focus-visible {
     width: 100%;
   }
   .footer-promo {
-    width: 160px;
+    width: 112px;
   }
   .footer-logo {
     height: 50px;
