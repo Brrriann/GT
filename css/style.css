@@ -2029,6 +2029,21 @@ button:focus-visible {
   line-height: 1.8 !important;
 }
 
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.footer-promo {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  opacity: 0.95;
+}
+
 .footer-social {
   display: flex;
   gap: 10px;
@@ -2087,6 +2102,13 @@ button:focus-visible {
   }
   .footer-social {
     display: none;
+  }
+  .footer-right {
+    align-items: flex-start;
+    width: 100%;
+  }
+  .footer-promo {
+    width: 160px;
   }
   .footer-logo {
     height: 50px;
