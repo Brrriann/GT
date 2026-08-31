@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GT탐정사무소 | 오직 당신만을 위한 탐정사무소</title>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18283639564"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18283639564');
+  </script>
+
   <!-- Open Graph / 카카오·SNS 공유 -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://detective-gt.com/" />
@@ -997,5 +1006,32 @@
   </script>
   <script language="javascript" src="//cdn.smlog.co.kr/core/smart_renew.js" charset="utf-8"></script>
   <noscript><img src="//a300.smlog.co.kr/smart_bda?_account=300982" style="display:none;width:0;height:0;" border="0"/></noscript>
+
+  <!-- Google Ads 전환추적: 버튼별 전환 이벤트 연결 (이벤트 위임) -->
+  <script>
+    (function () {
+      var CONVERSION_LABELS = {
+        kakao:    'AW-18283639564/FVcsCKmE0ekcEIzmqI5E',
+        telegram: 'AW-18283639564/VJRECKyE0ekcEIzmqI5E',
+        phone:    'AW-18283639564/D3MpCM2y2ukcEIzmqI5E'
+      };
+      function reportConversion(type) {
+        if (typeof gtag !== 'function' || !CONVERSION_LABELS[type]) return;
+        gtag('event', 'conversion', { 'send_to': CONVERSION_LABELS[type] });
+      }
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href') || '';
+        if (href.indexOf('tel:') === 0) {
+          reportConversion('phone');
+        } else if (href.indexOf('pf.kakao.com') !== -1) {
+          reportConversion('kakao');
+        } else if (href.indexOf('t.me/') !== -1) {
+          reportConversion('telegram');
+        }
+      }, true);
+    })();
+  </script>
 </body>
 </html>
