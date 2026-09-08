@@ -56,7 +56,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=20260908a" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -1058,9 +1058,14 @@
 
       if (isHiddenToday()) return;
 
-      /* 진입 시 노출 */
+      /* 진입 시 노출 (CSS 미로드 시엔 표시하지 않아 스크롤이 잠기지 않도록 방어) */
       setTimeout(function () {
         popup.hidden = false;
+        var styled = window.getComputedStyle(popup).position === 'fixed';
+        if (!styled) {          /* 팝업 CSS가 적용되지 않은 상태 → 페이지를 망가뜨리지 않고 종료 */
+          popup.hidden = true;
+          return;
+        }
         document.body.style.overflow = 'hidden';
       }, 600);
 
