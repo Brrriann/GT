@@ -998,7 +998,84 @@
     </div>
   </div>
 
+  <!-- ========== 책 출간 안내 팝업 ========== -->
+  <div id="bookPopup" class="book-popup" role="dialog" aria-modal="true" aria-labelledby="bookPopupTitle" hidden>
+    <div class="book-popup-dim" data-book-close></div>
+    <div class="book-popup-panel">
+      <button type="button" class="book-popup-x" data-book-close aria-label="팝업 닫기">&times;</button>
+
+      <div class="book-popup-body">
+        <img src="assets/book-popup.jpg" alt="GT탐정사무소 출간 도서 표지" class="book-popup-cover" />
+        <p class="book-popup-label">NEW</p>
+        <h2 class="book-popup-title" id="bookPopupTitle">GT탐정사무소 책 출간</h2>
+        <p class="book-popup-desc">현직 탐정이 직접 쓴 이야기를<br />지금 만나보실 수 있습니다.</p>
+        <a href="https://smartstore.naver.com/gtnet77/products/13751900778"
+           target="_blank" rel="noopener" class="book-popup-cta" id="bookPopupCta">책 자세히 보기</a>
+      </div>
+
+      <label class="book-popup-today">
+        <input type="checkbox" id="bookPopupToday" />
+        <span>오늘 하루 보지 않기</span>
+      </label>
+    </div>
+  </div>
+
   <script src="js/main.js?v=20260502c"></script>
+
+  <!-- 책 출간 팝업 제어 -->
+  <script>
+    (function () {
+      var STORAGE_KEY = 'gt_book_popup_hide_until';
+      var popup = document.getElementById('bookPopup');
+      if (!popup) return;
+
+      var todayCheck = document.getElementById('bookPopupToday');
+      var cta        = document.getElementById('bookPopupCta');
+
+      /* 스마트스토어 링크: 모바일 / PC 분기 */
+      var PRODUCT_PATH = '/gtnet77/products/13751900778';
+      var isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent)
+                     || window.innerWidth <= 768;
+      if (cta) {
+        cta.href = (isMobile ? 'https://m.smartstore.naver.com' : 'https://smartstore.naver.com') + PRODUCT_PATH;
+      }
+
+      function todayStamp() {
+        var d = new Date();
+        return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+      }
+      function isHiddenToday() {
+        try { return localStorage.getItem(STORAGE_KEY) === todayStamp(); }
+        catch (e) { return false; }
+      }
+      function closePopup() {
+        if (todayCheck && todayCheck.checked) {
+          try { localStorage.setItem(STORAGE_KEY, todayStamp()); } catch (e) {}
+        }
+        popup.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      if (isHiddenToday()) return;
+
+      /* 진입 시 노출 */
+      setTimeout(function () {
+        popup.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }, 600);
+
+      /* 닫기: X 버튼 / 배경 클릭 */
+      Array.prototype.forEach.call(popup.querySelectorAll('[data-book-close]'), function (el) {
+        el.addEventListener('click', closePopup);
+      });
+      /* 닫기: Esc */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !popup.hidden) closePopup();
+      });
+      /* 상품 페이지로 이동 시에도 팝업 정리 */
+      if (cta) cta.addEventListener('click', closePopup);
+    })();
+  </script>
 
   <!-- Smartlog -->
   <script type="text/javascript">
