@@ -169,11 +169,23 @@ if (serviceSelect) {
     msgEl.textContent = '상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.';
     msgEl.className   = 'form-msg form-msg--success';
     msgEl.hidden      = false;
+    reportLeadConversion();
     history.replaceState(null, '', location.pathname);
     setTimeout(() => {
       const contactSection = document.getElementById('contact');
       if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
     }, 100);
+  }
+
+  /* Google Ads 전환: 견적문의(리드폼)가 실제 접수 성공한 시점에만 1회 발사
+     - head에 두면 페이지 로드마다 가짜 전환이 생기므로 성공 분기에서만 호출 */
+  function reportLeadConversion() {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'conversion', {
+      'send_to':  'AW-18283639564/NlzrCNGrl_UcEIzmqI5E',
+      'value':    1.0,
+      'currency': 'KRW'
+    });
   }
 
   function showMsg(text, type) {
@@ -231,6 +243,7 @@ if (serviceSelect) {
 
       if (data.success) {
         showMsg('상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.', 'success');
+        reportLeadConversion();
         form.reset();
         if (serviceSelect) serviceSelect.classList.remove('has-value');
       } else {
