@@ -1562,7 +1562,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   gap: 24px;
 }
 .partnership-img-item {
-  width: calc((100% - 48px) / 3);
+  width: calc((100% - 24px) / 2);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.1);
