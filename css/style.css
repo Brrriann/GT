@@ -2407,3 +2407,110 @@ button:focus-visible {
   .book-popup-desc  { font-size: 13px; }
   .book-popup-cta   { padding: 13px 18px; font-size: 14px; }
 }
+
+/* ===== [9-2] 고객 후기 슬라이더 (구글 비즈니스 리뷰) ===== */
+#reviews {
+  background: var(--color-white);
+  padding: 96px 24px;
+  border-top: 1px solid var(--color-border);
+}
+#reviews[hidden] { display: none !important; }
+.reviews-inner { max-width: 1280px; margin: 0 auto; }
+.reviews-slider { position: relative; }
+.reviews-viewport { overflow: hidden; padding: 8px 4px 24px; margin: 0 -4px; }
+.reviews-track {
+  display: flex;
+  gap: 24px;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.reviews-track.no-anim { transition: none; }
+
+.review-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+.review-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.review-stars { display: flex; gap: 2px; color: #FBBC04; }
+.review-stars svg { width: 18px; height: 18px; }
+.review-stars .off { color: #CBD5E1; }
+.review-date { font-size: 13px; color: var(--color-muted); white-space: nowrap; }
+.review-text {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--color-secondary);
+  white-space: pre-line;
+  margin-bottom: 24px;
+}
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+.review-avatar {
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.review-name { font-size: 15px; font-weight: 700; color: var(--color-primary); }
+.review-source {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--color-muted); margin-top: 2px;
+}
+.review-source svg { width: 13px; height: 13px; }
+
+.reviews-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 16px;
+}
+.reviews-btn {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-primary);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.reviews-btn svg { width: 20px; height: 20px; }
+.reviews-btn:hover { background: var(--color-primary); color: var(--color-white); border-color: var(--color-primary); }
+.reviews-btn:focus-visible { outline: 2px solid var(--color-cta); outline-offset: 2px; }
+.reviews-counter { font-size: 15px; color: var(--color-muted); min-width: 64px; text-align: center; }
+.reviews-counter strong { color: var(--color-primary); font-weight: 700; }
+
+@media (max-width: 1024px) {
+  .review-card { flex-basis: calc((100% - 24px) / 2); }
+}
+@media (max-width: 768px) {
+  #reviews { padding: 64px 20px; }
+  .reviews-track { gap: 16px; }
+  .review-card { flex-basis: 100%; padding: 24px 22px 20px; border-radius: 16px; }
+  .review-text { font-size: 15px; }
+  .reviews-btn { width: 44px; height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reviews-track { transition: none; }
+}

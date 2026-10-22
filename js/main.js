@@ -540,3 +540,146 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     if (Math.abs(diff) > 40) showImage(diff > 0 ? current + 1 : current - 1);
   }, { passive: true });
 }());
+
+/* ===== 고객 후기 슬라이더 (구글 비즈니스 리뷰) =====
+   - index.html의 #reviewsData(JSON 배열)를 읽어 카드 생성
+   - 데이터가 없으면 섹션을 숨긴 채로 둠
+   - 한 장씩 자동 슬라이드(무한 루프) + 화살표 + 스와이프 */
+(function () {
+  var section = document.getElementById('reviews');
+  var dataEl  = document.getElementById('reviewsData');
+  var track   = document.getElementById('reviewsTrack');
+  if (!section || !dataEl || !track) return;
+
+  var reviews = [];
+  try { reviews = JSON.parse(dataEl.textContent || '[]'); } catch (e) { reviews = []; }
+  reviews = reviews.filter(function (r) { return r && r.text; });
+  var total = reviews.length;
+  if (!total) return;               /* 후기 없으면 섹션 숨김 유지 */
+  section.hidden = false;
+
+  var prevBtn = document.getElementById('reviewsPrev');
+  var nextBtn = document.getElementById('reviewsNext');
+  var curEl   = document.getElementById('reviewsCurrent');
+  var totEl   = document.getElementById('reviewsTotal');
+  var controls = section.querySelector('.reviews-controls');
+  totEl.textContent = total;
+
+  var STAR = '<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L10 14.9l-5.25 2.75 1-5.8L1.5 7.7l5.9-.9z"/></svg>';
+  var GOOGLE_G = '<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.2l7.9 6.2C12.5 13.7 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.4 5.7c4.3-4 6.9-9.9 6.9-17.2z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.2C1 16.6 0 20.2 0 24s1 7.4 2.7 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.2 0-11.5-4.2-13.4-9.9l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>';
+
+  function makeCard(r) {
+    var card = document.createElement('article');
+    card.className = 'review-card';
+    var rating = Math.max(0, Math.min(5, Math.round(Number(r.rating) || 5)));
+    var stars = '';
+    for (var i = 0; i < 5; i++) stars += i < rating ? STAR : STAR.replace('<svg', '<svg class="off"');
+    card.innerHTML =
+      '<div class="review-top"><div class="review-stars" aria-label="별점 ' + rating + '점">' + stars + '</div>' +
+      '<span class="review-date"></span></div>' +
+      '<p class="review-text"></p>' +
+      '<div class="review-author"><span class="review-avatar"></span>' +
+      '<div><p class="review-name"></p><p class="review-source">' + GOOGLE_G + 'Google 리뷰</p></div></div>';
+    var name = String(r.name || '의뢰인');
+    card.querySelector('.review-date').textContent = r.date || '';
+    card.querySelector('.review-text').textContent = r.text;
+    card.querySelector('.review-name').textContent = name;
+    card.querySelector('.review-avatar').textContent = name.charAt(0);
+    return card;
+  }
+
+  var perView = 1, index = 0, timer = null, busy = false;
+  var AUTO_MS = 4500;
+
+  function getPerView() {
+    var w = window.innerWidth;
+    return w > 1024 ? 3 : (w > 768 ? 2 : 1);
+  }
+
+  /* 무한 루프용: 앞뒤로 perView장씩 복제 */
+  function build() {
+    perView = Math.min(getPerView(), total);
+    track.innerHTML = '';
+    var looping = total > perView;
+    controls.style.display = looping ? '' : 'none';
+    track.style.justifyContent = looping ? '' : 'center';
+    if (looping) {
+      for (var a = total - perView; a < total; a++) track.appendChild(makeCard(reviews[a])).setAttribute('aria-hidden', 'true');
+    }
+    reviews.forEach(function (r) { track.appendChild(makeCard(r)); });
+    if (looping) {
+      for (var b = 0; b < perView; b++) track.appendChild(makeCard(reviews[b])).setAttribute('aria-hidden', 'true');
+    }
+    index = looping ? perView : 0;
+    jump();
+  }
+
+  function step() {
+    var first = track.children[0];
+    if (!first) return 0;
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+    return first.getBoundingClientRect().width + gap;
+  }
+  function render() {
+    track.style.transform = 'translate3d(' + (-index * step()) + 'px,0,0)';
+    var real = ((index - perView) % total + total) % total;
+    curEl.textContent = real + 1;
+  }
+  function jump() {
+    track.classList.add('no-anim');
+    render();
+    void track.offsetWidth;          /* 리플로우 후 애니메이션 복원 */
+    track.classList.remove('no-anim');
+  }
+  function go(dir) {
+    if (busy || total <= perView) return;
+    busy = true;
+    index += dir;
+    render();
+  }
+  track.addEventListener('transitionend', function (e) {
+    if (e.target !== track) return;
+    if (index >= total + perView) { index -= total; jump(); }
+    else if (index < perView)     { index += total; jump(); }
+    busy = false;
+  });
+
+  function start() { stop(); if (total > perView) timer = setInterval(function () { go(1); }, AUTO_MS); }
+  function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+
+  prevBtn.addEventListener('click', function () { go(-1); start(); });
+  nextBtn.addEventListener('click', function () { go(1);  start(); });
+
+  var slider = section.querySelector('.reviews-slider');
+  slider.addEventListener('mouseenter', stop);
+  slider.addEventListener('mouseleave', start);
+  slider.addEventListener('focusin', stop);
+  slider.addEventListener('focusout', start);
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+  /* 스와이프 */
+  var sx = 0, sy = 0, swiping = false;
+  track.addEventListener('touchstart', function (e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; swiping = true; stop();
+  }, { passive: true });
+  track.addEventListener('touchend', function (e) {
+    if (!swiping) return; swiping = false;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+    start();
+  }, { passive: true });
+
+  /* 화면 크기 변경 시 다시 구성 */
+  var lastPer = getPerView(), rt = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () {
+      var p = getPerView();
+      if (p !== lastPer) { lastPer = p; busy = false; build(); start(); }
+      else jump();
+    }, 150);
+  });
+
+  build();
+  start();
+})();
