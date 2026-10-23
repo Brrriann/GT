@@ -2514,3 +2514,47 @@ button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .reviews-track { transition: none; }
 }
+
+/* 후기: 평점 요약 배지 */
+.reviews-summary {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 10px;
+  margin-top: 24px;
+  padding: 10px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-bg);
+  font-size: 15px;
+  color: var(--color-secondary);
+}
+.reviews-summary strong { color: var(--color-primary); font-weight: 800; }
+.reviews-summary-g svg { width: 18px; height: 18px; display: block; }
+.reviews-summary-stars { color: #FBBC04; letter-spacing: 1px; }
+.reviews-summary-count { color: var(--color-muted); font-size: 14px; }
+
+/* 후기: 긴 본문 7줄 접기 + 더보기 */
+.review-text.is-clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.review-more {
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-cta);
+  padding: 4px 0;
+  margin-bottom: 16px;
+}
+.review-more:hover { text-decoration: underline; }
+.review-more[hidden] { display: none; }
+.review-card.is-open .review-text { margin-bottom: 8px; }
+@media (max-width: 768px) {
+  .reviews-summary { border-radius: 16px; font-size: 14px; padding: 10px 16px; }
+}

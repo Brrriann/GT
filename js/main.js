@@ -585,6 +585,22 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     card.querySelector('.review-text').textContent = r.text;
     card.querySelector('.review-name').textContent = name;
     card.querySelector('.review-avatar').textContent = name.charAt(0);
+
+    /* 긴 후기: 7줄로 접고 '더보기'로 펼침 (넘칠 때만 버튼 노출) */
+    var textEl = card.querySelector('.review-text');
+    textEl.classList.add('is-clamped');
+    var more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'review-more';
+    more.textContent = '더보기';
+    more.hidden = true;
+    textEl.insertAdjacentElement('afterend', more);
+    more.addEventListener('click', function () {
+      var open = card.classList.toggle('is-open');
+      textEl.classList.toggle('is-clamped', !open);
+      more.textContent = open ? '접기' : '더보기';
+      if (open) stop(); else start();
+    });
     return card;
   }
 
@@ -612,6 +628,16 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     }
     index = looping ? perView : 0;
     jump();
+    checkClamp();
+  }
+
+  /* 실제로 7줄을 넘는 카드에만 '더보기' 표시 */
+  function checkClamp() {
+    Array.prototype.forEach.call(track.querySelectorAll('.review-card'), function (card) {
+      var t = card.querySelector('.review-text'), m = card.querySelector('.review-more');
+      if (!t || !m || card.classList.contains('is-open')) return;
+      m.hidden = t.scrollHeight <= t.clientHeight + 2;
+    });
   }
 
   function step() {
@@ -676,7 +702,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     rt = setTimeout(function () {
       var p = getPerView();
       if (p !== lastPer) { lastPer = p; busy = false; build(); start(); }
-      else jump();
+      else { jump(); checkClamp(); }
     }, 150);
   });
 
