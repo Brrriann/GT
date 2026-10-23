@@ -604,8 +604,8 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     return card;
   }
 
-  var perView = 1, index = 0, timer = null, busy = false;
-  var AUTO_MS = 4500;
+  var perView = 1, index = 0, timer = null, busy = false, hovering = false;
+  var AUTO_MS = 3000;
 
   function getPerView() {
     var w = window.innerWidth;
@@ -670,17 +670,20 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     busy = false;
   });
 
-  function start() { stop(); if (total > perView) timer = setInterval(function () { go(1); }, AUTO_MS); }
+  function start() {
+    stop();
+    if (total <= perView || hovering || track.querySelector('.review-card.is-open')) return;
+    timer = setInterval(function () { go(1); }, AUTO_MS);
+  }
   function stop()  { if (timer) { clearInterval(timer); timer = null; } }
 
   prevBtn.addEventListener('click', function () { go(-1); start(); });
   nextBtn.addEventListener('click', function () { go(1);  start(); });
 
   var slider = section.querySelector('.reviews-slider');
-  slider.addEventListener('mouseenter', stop);
-  slider.addEventListener('mouseleave', start);
-  slider.addEventListener('focusin', stop);
-  slider.addEventListener('focusout', start);
+  /* 실제 마우스를 올렸을 때만 일시정지 (모바일 탭이 만드는 가짜 hover로 멈추지 않도록) */
+  slider.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hovering = true; stop(); } });
+  slider.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hovering = false; start(); } });
   document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
 
   /* 스와이프 */
