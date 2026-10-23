@@ -2498,8 +2498,23 @@ button:focus-visible {
 .reviews-btn svg { width: 20px; height: 20px; }
 .reviews-btn:hover { background: var(--color-primary); color: var(--color-white); border-color: var(--color-primary); }
 .reviews-btn:focus-visible { outline: 2px solid var(--color-cta); outline-offset: 2px; }
-.reviews-counter { font-size: 15px; color: var(--color-muted); min-width: 64px; text-align: center; }
-.reviews-counter strong { color: var(--color-primary); font-weight: 700; }
+.reviews-dots { display: flex; align-items: center; justify-content: center; gap: 4px; }
+.reviews-dot {
+  width: 20px; height: 20px;            /* 터치 영역 */
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.reviews-dot::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: #CBD5E1;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.reviews-dot:hover::before { background: #94A3B8; }
+.reviews-dot.is-active { width: 32px; }
+.reviews-dot.is-active::before { width: 24px; background: var(--color-primary); }
+.reviews-dot:focus-visible { outline: 2px solid var(--color-cta); outline-offset: 2px; border-radius: 999px; }
 
 @media (max-width: 1024px) {
   .review-card { flex-basis: calc((100% - 24px) / 2); }
@@ -2510,6 +2525,8 @@ button:focus-visible {
   .review-card { flex-basis: 100%; padding: 24px 22px 20px; border-radius: 16px; }
   .review-text { font-size: 15px; }
   .reviews-btn { width: 44px; height: 44px; }
+  .reviews-controls { gap: 12px; }
+  .reviews-dots { gap: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .reviews-track { transition: none; }

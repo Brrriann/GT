@@ -560,10 +560,20 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 
   var prevBtn = document.getElementById('reviewsPrev');
   var nextBtn = document.getElementById('reviewsNext');
-  var curEl   = document.getElementById('reviewsCurrent');
-  var totEl   = document.getElementById('reviewsTotal');
+  var dotsEl  = document.getElementById('reviewsDots');
   var controls = section.querySelector('.reviews-controls');
-  totEl.textContent = total;
+  /* 닷 네비게이션: 후기 수만큼 생성, 누르면 해당 후기로 이동 */
+  var dots = [];
+  for (var d = 0; d < total; d++) {
+    var dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'reviews-dot';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', (d + 1) + '번째 후기');
+    (function (n) { dot.addEventListener('click', function () { goTo(n); start(); }); })(d);
+    dotsEl.appendChild(dot);
+    dots.push(dot);
+  }
 
   var STAR = '<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L10 14.9l-5.25 2.75 1-5.8L1.5 7.7l5.9-.9z"/></svg>';
   var GOOGLE_G = '<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.2l7.9 6.2C12.5 13.7 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.4 5.7c4.3-4 6.9-9.9 6.9-17.2z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.2C1 16.6 0 20.2 0 24s1 7.4 2.7 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.2 0-11.5-4.2-13.4-9.9l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>';
@@ -649,7 +659,11 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   function render() {
     track.style.transform = 'translate3d(' + (-index * step()) + 'px,0,0)';
     var real = ((index - perView) % total + total) % total;
-    curEl.textContent = real + 1;
+    dots.forEach(function (el, n) {
+      var on = n === real;
+      el.classList.toggle('is-active', on);
+      el.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
   }
   function jump() {
     track.classList.add('no-anim');
@@ -663,6 +677,16 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     index += dir;
     render();
   }
+  /* 닷 클릭: 지금 위치에서 가장 가까운 방향으로 이동 */
+  function goTo(n) {
+    if (busy || total <= perView) return;
+    var real = ((index - perView) % total + total) % total;
+    if (n === real) return;
+    busy = true;
+    index += n - real;
+    render();
+  }
+
   track.addEventListener('transitionend', function (e) {
     if (e.target !== track) return;
     if (index >= total + perView) { index -= total; jump(); }
