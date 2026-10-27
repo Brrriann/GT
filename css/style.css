@@ -2575,3 +2575,14 @@ button:focus-visible {
 @media (max-width: 768px) {
   .reviews-summary { border-radius: 16px; font-size: 14px; padding: 10px 16px; }
 }
+
+/* 주요업무: 원본 사진이 어두운 카드(가정문제)는 덮개를 옅게 해서 사진이 보이도록 */
+.service-card--light .service-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(10,30,90,0.15) 0%,
+    rgba(8,24,72,0.45) 55%,
+    rgba(5,15,55,0.70) 100%
+  );
+}
+.service-card--light .service-content { text-shadow: 0 1px 6px rgba(0,0,0,0.45); }
